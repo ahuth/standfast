@@ -32,17 +32,6 @@ describe User, type: :model do
       end
     end
 
-    context "without a password" do
-      before do
-        user.encrypted_password = nil
-      end
-
-      it "is invalid" do
-        expect(user).to_not be_valid
-        expect(user.errors.full_messages).to eq(["Encrypted password can't be blank"])
-      end
-    end
-
     context "with an email that already exists" do
       let(:bob) { users(:bob) }
 
