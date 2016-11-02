@@ -2,6 +2,7 @@
 
 source 'https://rubygems.org'
 
+gem 'devise', '~> 4.2'
 gem 'rails', '~> 5.0'
 gem 'sqlite3'
 gem 'puma', '~> 3.0'
