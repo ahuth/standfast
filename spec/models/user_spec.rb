@@ -39,5 +39,18 @@ describe User, type: :model do
         expect(user).to_not be_valid
       end
     end
+
+    context "with an email that already exists" do
+      let(:bob) { users(:bob) }
+
+      before do
+        user.email = bob.email
+      end
+
+      it "is invalid" do
+        expect(user).to_not be_valid
+        expect(user.errors.full_messages).to eq(["Email has already been taken"])
+      end
+    end
   end
 end
