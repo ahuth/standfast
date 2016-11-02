@@ -17,6 +17,7 @@ describe User, type: :model do
 
       it "is invalid" do
         expect(user).to_not be_valid
+        expect(user.errors.full_messages).to eq(["Name can't be blank"])
       end
     end
 
@@ -27,6 +28,7 @@ describe User, type: :model do
 
       it "is invalid" do
         expect(user).to_not be_valid
+        expect(user.errors.full_messages).to eq(["Email can't be blank"])
       end
     end
 
@@ -37,6 +39,7 @@ describe User, type: :model do
 
       it "is invalid" do
         expect(user).to_not be_valid
+        expect(user.errors.full_messages).to eq(["Encrypted password can't be blank"])
       end
     end
 
