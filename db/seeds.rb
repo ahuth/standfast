@@ -1,4 +1,9 @@
-if Rails.env.development?
+def create_data!
+  create_jane!
+  print_info
+end
+
+def create_jane!
   jane = User.create(name: 'Jane', email: 'jane@example.com', password: 'password', password_confirmation: 'password')
   blue_team = Team.create(name: 'Blue', user_id: jane.id)
   red_team = Team.create(name: 'Red', user_id: jane.id)
@@ -9,13 +14,17 @@ if Rails.env.development?
   Seat.create(name: 'Goose', email: 'goose@example.com', team_id: red_team.id)
   Seat.create(name: 'Iceman', email: 'iceman@example.com', team_id: red_team.id)
   Seat.create(name: 'Maverick', email: 'maverick@example.com', team_id: red_team.id)
+end
+
+def print_info
   puts <<~EOS
-    ================================================
+    ==================================
     Created the following users:
     - jane@example.com
 
-    Each has a password of 'password'. Additionally,
-    several teams and seats have been created.
-    ================================================
+    Each has a password of 'password'.
+    ==================================
   EOS
 end
+
+create_data! if Rails.env.development?
