@@ -9,4 +9,13 @@ if Rails.env.development?
   Seat.create(name: 'Goose', email: 'goose@example.com', team_id: red_team.id)
   Seat.create(name: 'Iceman', email: 'iceman@example.com', team_id: red_team.id)
   Seat.create(name: 'Maverick', email: 'maverick@example.com', team_id: red_team.id)
+  puts <<~EOS
+    ================================================
+    Created the following users:
+    - jane@example.com
+
+    Each has a password of 'password'. Additionally,
+    several teams and seats have been created.
+    ================================================
+  EOS
 end
