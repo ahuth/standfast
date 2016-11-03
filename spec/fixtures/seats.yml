@@ -1,0 +1,54 @@
+bob_black_team_bill_seat:
+  name: Bill
+  email: bill@example.com
+  team: bob_black_team
+
+bob_black_team_ted_seat:
+  name: Ted
+  email: ted@example.com
+  team: bob_black_team
+
+bob_pink_team_bill_seat:
+  name: Bill
+  email: bill@example.com
+  team: bob_pink_team
+
+bob_pink_team_jill_seat:
+  name: Jill
+  email: jill@example.com
+  team: bob_pink_team
+
+jane_blue_team_adam_seat:
+  name: Adam
+  email: adam@example.com
+  team: jane_blue_team
+
+jane_blue_team_eric_seat:
+  name: Eric
+  email: eric@example.com
+  team: jane_blue_team
+
+jane_blue_team_ryan_seat:
+  name: Ryan
+  email: ryan@example.com
+  team: jane_blue_team
+
+jane_blue_team_shirish_seat:
+  name: Shirish
+  email: shirish@example.com
+  team: jane_blue_team
+
+jane_red_team_goose_seat:
+  name: Goose
+  email: goose@example.com
+  team: jane_red_team
+
+jane_red_team_iceman_seat:
+  name: Iceman
+  email: iceman@example.com
+  team: jane_red_team
+
+jane_red_team_maverick_seat:
+  name: Maverick
+  email: maverick@example.com
+  team: jane_red_team

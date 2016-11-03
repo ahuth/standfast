@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102143013) do
+ActiveRecord::Schema.define(version: 20161103040628) do
+
+  create_table "seats", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "email",      null: false
+    t.integer  "team_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id", "email"], name: "index_seats_on_team_id_and_email", unique: true
+    t.index ["team_id"], name: "index_seats_on_team_id"
+  end
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",       null: false
