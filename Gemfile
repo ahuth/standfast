@@ -11,6 +11,7 @@ gem 'turbolinks', '~> 5'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'pry-byebug', '~> 3.4'
   gem 'rspec-rails', '~> 3.5'
 end
 
