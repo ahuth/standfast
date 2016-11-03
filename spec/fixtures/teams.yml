@@ -1,0 +1,15 @@
+bob_black_team:
+  name: black
+  user: bob
+
+bob_pink_team:
+  name: pink
+  user: bob
+
+jane_blue_team:
+  name: blue
+  user: jane
+
+jane_red_team:
+  name: red
+  user: jane
