@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe User, type: :model do
-  fixtures :users
-
   describe "validations" do
     let(:user) { users(:jane) }
 

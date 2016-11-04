@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe Response, type: :model do
-  fixtures :responses
-
   describe "validations" do
     let(:response) { responses(:jane_blue_team_shirish_seat_response_1) }
 

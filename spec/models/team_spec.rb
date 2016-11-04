@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe Team, type: :model do
-  fixtures :teams
-
   describe "validations" do
     let(:team) { teams(:jane_blue_team) }
 

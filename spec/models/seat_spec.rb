@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe Seat, type: :model do
-  fixtures :seats
-
   describe "validations" do
     let(:seat) { seats(:bob_black_team_bill_seat) }
 
