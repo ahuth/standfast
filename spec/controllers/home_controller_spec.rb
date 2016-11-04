@@ -6,9 +6,9 @@ describe HomeController, type: :controller do
       get :index
     end
 
-    it "returns http success" do
+    it "is successful" do
       do_request
-      expect(response).to be_success
+      expect(response).to have_http_status(:success)
     end
   end
 end
