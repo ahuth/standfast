@@ -1,4 +1,4 @@
 <div>
-  Logged in as <strong><%= current_user.email %></strong>.
+  <span>Logged in as <strong><%= current_user.email %></strong>.<span>
   <%= button_to "Logout", destroy_user_session_path, method: :delete %>
 </div>
