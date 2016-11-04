@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103040628) do
+ActiveRecord::Schema.define(version: 20161103202706) do
+
+  create_table "responses", force: :cascade do |t|
+    t.text     "body",                       null: false
+    t.boolean  "handled",    default: false, null: false
+    t.integer  "seat_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["handled"], name: "index_responses_on_handled"
+    t.index ["seat_id"], name: "index_responses_on_seat_id"
+  end
 
   create_table "seats", force: :cascade do |t|
     t.string   "name",       null: false

@@ -1,0 +1,12 @@
+jane_blue_team_ryan_seat_response_1:
+  handled: No
+  seat: jane_blue_team_ryan_seat
+  body: |
+    - Started expense sync
+    - Deployed to staging
+
+jane_blue_team_shirish_seat_response_1:
+  handled: No
+  seat: jane_blue_team_shirish_seat
+  body: |
+    Beat Eric at Ping-Pong!
