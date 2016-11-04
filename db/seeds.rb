@@ -1,9 +1,4 @@
-def create_data!
-  create_jane!
-  print_info
-end
-
-def create_jane!
+if Rails.env.development?
   jane = User.create(name: 'Jane', email: 'jane@example.com', password: 'password', password_confirmation: 'password')
   blue_team = Team.create(name: 'Blue', user_id: jane.id)
   red_team = Team.create(name: 'Red', user_id: jane.id)
@@ -21,9 +16,7 @@ def create_jane!
     - Started expense sync
     - Deployed to staging
   EOS
-end
 
-def print_info
   puts <<~EOS
     ==================================
     Created the following users:
@@ -33,5 +26,3 @@ def print_info
     ==================================
   EOS
 end
-
-create_data! if Rails.env.development?
