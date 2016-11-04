@@ -30,4 +30,50 @@ describe Response, type: :model do
       end
     end
   end
+
+  describe "scopes" do
+    describe "unhandled" do
+      let(:response1) { responses(:jane_blue_team_ryan_seat_response_1) }
+      let(:response2) { responses(:jane_blue_team_shirish_seat_response_1) }
+      let(:response_ids) { [response1.id, response2.id] }
+      let(:scoped_ids) { unscoped.unhandled.pluck(:id) }
+      let(:unscoped) { Response.where(id: response_ids) }
+
+      context "when no responses are handled" do
+        before do
+          expect(response1).to_not be_handled
+          expect(response2).to_not be_handled
+        end
+
+        it "returns all responses" do
+          expect(scoped_ids).to match_array(response_ids)
+        end
+      end
+
+      context "when some responses are handled" do
+        before do
+          expect(response1).to_not be_handled
+          response2.handled = true
+          response2.save!
+        end
+
+        it "returns only the unhandled responses" do
+          expect(scoped_ids).to match_array([response1.id])
+        end
+      end
+
+      context "when all responses are handled" do
+        before do
+          response1.handled = true
+          response1.save!
+          response2.handled = true
+          response2.save!
+        end
+
+        it "returns no responses" do
+          expect(scoped_ids).to eq([])
+        end
+      end
+    end
+  end
 end
