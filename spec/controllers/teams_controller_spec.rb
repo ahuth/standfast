@@ -5,17 +5,7 @@ describe TeamsController, type: :controller do
   let(:user) { users(:jane) }
 
   describe "#index" do
-    def do_request
-      get :index
-    end
-
-    it_behaves_like "login is required"
-
-    it "is successful" do
-      sign_in(user)
-      do_request
-      expect(response).to have_http_status(:success)
-    end
+    it_behaves_like "a protected index action"
   end
 
   describe "#show" do

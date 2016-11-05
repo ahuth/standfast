@@ -23,3 +23,27 @@ shared_examples "resource ownership is required" do
     end
   end
 end
+
+shared_examples "a protected index action" do
+  context "when a user is not signed in" do
+    before do
+      expect(subject.current_user).to be_nil
+      get :index
+    end
+
+    it "redirects to the login page" do
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
+
+  context "when a user is signed in" do
+    before do
+      sign_in(user)
+      get :index
+    end
+
+    it "is successful" do
+      expect(response).to have_http_status(:success)
+    end
+  end
+end
