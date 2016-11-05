@@ -1,0 +1,12 @@
+<p>
+  <b>Name:</b>
+  <%= @team.name %>
+</p>
+
+<ul>
+  <% @team.seats.each do |seat| %>
+    <li><%= seat.email %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Back", teams_path %>
