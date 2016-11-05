@@ -9,31 +9,9 @@ describe TeamsController, type: :controller do
   end
 
   describe "#show" do
-    def do_request
-      get :show, params: { id: team.id }
-    end
-
-    it_behaves_like "login is required" do
-      let(:team) { teams(:jane_red_team) }
-    end
-
-    it_behaves_like "resource ownership is required" do
-      let(:team) { teams(:bob_black_team) }
-      let(:resource_owner_id) { team.user_id }
-    end
-
-    context "when the team belongs to the user" do
-      let(:team) { teams(:jane_red_team) }
-
-      before do
-        expect(team.user_id).to eq(user.id)
-      end
-
-      it "is successful" do
-        sign_in(user)
-        do_request
-        expect(response).to have_http_status(:success)
-      end
+    it_behaves_like "a protected show action" do
+      let(:object_owned_by_user) { teams(:jane_red_team) }
+      let(:object_not_owned_by_user) { teams(:bob_pink_team) }
     end
   end
 

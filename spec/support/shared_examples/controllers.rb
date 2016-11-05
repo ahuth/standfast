@@ -47,3 +47,42 @@ shared_examples "a protected index action" do
     end
   end
 end
+
+shared_examples "a protected show action" do
+  def do_request(object)
+    get :show, params: { id: object.id }
+  end
+
+  context "when a user is not signed in" do
+    before do
+      expect(subject.current_user).to be_nil
+      do_request(object_owned_by_user)
+    end
+
+    it "redirects to the login page" do
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
+
+  context "when a user is signed in" do
+    before do
+      sign_in(user)
+    end
+
+    context "for an object not owned by the user" do
+      it "is not successful" do
+        expect { do_request(object_not_owned_by_user) }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    context "for a object owned by the user" do
+      before do
+        do_request(object_owned_by_user)
+      end
+
+      it "is successful" do
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+end
