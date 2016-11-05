@@ -189,4 +189,40 @@ describe TeamsController, type: :controller do
       end
     end
   end
+
+  describe "#destroy" do
+    def do_request
+      delete :destroy, params: { id: team.id }
+    end
+
+    it_behaves_like "login is required" do
+      let(:team) { teams(:jane_blue_team) }
+      let(:team_params) { {} }
+    end
+
+    it_behaves_like "resource ownership is required" do
+      let(:team) { teams(:bob_black_team) }
+      let(:team_params) { {} }
+      let(:resource_owner_id) { team.user_id }
+    end
+
+    context "when the team belongs to the user" do
+      let(:team) { teams(:jane_blue_team) }
+
+      before do
+        expect(team.user_id).to eq(user.id)
+      end
+
+      it "redirects to the teams index" do
+        sign_in(user)
+        do_request
+        expect(response).to redirect_to(teams_path)
+      end
+
+      it "destroys the model" do
+        sign_in(user)
+        expect { do_request }.to change { Team.count }.by(-1)
+      end
+    end
+  end
 end

@@ -4,6 +4,7 @@
     <th>Name</th>
     <th></th>
     <th></th>
+    <td></td>
   </thead>
   <tbody>
     <% @teams.each do |team| %>
@@ -11,7 +12,7 @@
         <td><%= team.name %></td>
         <td><%= link_to "Show", team %></td>
         <td><%= link_to "Edit", edit_team_path(team) %></td>
-        <td></td>
+        <td><%= button_to "Remove", team_path(team), method: :delete %></td>
       </tr>
     <% end %>
   </tbody>

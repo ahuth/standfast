@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_team, only: [:show, :edit, :update]
+  before_action :load_team, only: [:show, :edit, :update, :destroy]
 
   def index
     @teams = current_user.teams
@@ -32,6 +32,11 @@ class TeamsController < ApplicationController
     else
       render action: "edit"
     end
+  end
+
+  def destroy
+    @team.destroy!
+    redirect_to teams_path
   end
 
   private
