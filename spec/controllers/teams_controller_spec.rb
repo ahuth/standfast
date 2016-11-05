@@ -16,18 +16,8 @@ describe TeamsController, type: :controller do
   end
 
   describe "#new" do
-    let(:user) { users(:jane) }
-
-    def do_request
-      get :new
-    end
-
-    it_behaves_like "login is required"
-
-    it "is successful" do
-      sign_in(user)
-      do_request
-      expect(response).to have_http_status(:success)
+    it_behaves_like "a protected new action", skip_ownership_check: true do
+      let(:owner_request_params) { {} }
     end
   end
 

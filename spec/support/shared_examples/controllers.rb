@@ -86,3 +86,47 @@ shared_examples "a protected show action" do
     end
   end
 end
+
+shared_examples "a protected new action" do |options = {}|
+  context "when a user is not signed in" do
+    before do
+      expect(subject.current_user).to be_nil
+      get :new, params: owner_request_params
+    end
+
+    it "redirects to the login page" do
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
+
+  context "when a user is signed in" do
+    before do
+      sign_in(user)
+    end
+
+    context "for an object not owned by the user", if: !options[:skip_ownership_check] do
+      def do_request
+        get :new, params: non_owner_request_params
+      end
+
+      it "is not successful" do
+        expect { do_request }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    context "for an object owned by the user", if: !options[:skip_ownership_check] do
+      before do
+        get :new, params: owner_request_params
+      end
+
+      it "is successful" do
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    it "is successful", if: options[:skip_ownership_check] do
+      get :new, params: owner_request_params
+      expect(response).to have_http_status(:success)
+    end
+  end
+end
