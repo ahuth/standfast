@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
   before_action :load_team, only: [:show, :edit, :update, :destroy]
 
   def index
-    @teams = current_user.teams
+    @teams = current_user.teams.order(:name)
   end
 
   def show
