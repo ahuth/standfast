@@ -1,10 +1,20 @@
 class SeatsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_seat, only: [:edit, :update, :destroy]
-  before_action :load_team, only: [:new]
+  before_action :load_team, only: [:new, :create]
 
   def new
     @seat = Seat.new(team: @team)
+  end
+
+  def create
+    @seat = Seat.new(seat_params)
+    @seat.team = @team
+    if @seat.save
+      redirect_to team_path(@seat.team), notice: "Seat was succesfully created"
+    else
+      render action: "new"
+    end
   end
 
   def edit

@@ -18,7 +18,7 @@ describe SeatsController, type: :controller do
       let(:resource_owner_id) { team.user_id }
     end
 
-    context "when the seat belongs to the user" do
+    context "when the team belongs to the user" do
       let(:team) { teams(:bob_black_team) }
 
       before do
@@ -29,6 +29,63 @@ describe SeatsController, type: :controller do
         sign_in(user)
         do_request
         expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
+  describe "#create" do
+    def do_request
+      post :create, params: { team_id: team.id, seat: seat_params }
+    end
+
+    it_behaves_like "login is required" do
+      let(:team) { teams(:bob_pink_team) }
+      let(:seat_params) { {} }
+    end
+
+    it_behaves_like "resource ownership is required" do
+      let(:team) { teams(:jane_red_team) }
+      let(:seat_params) { {} }
+      let(:resource_owner_id) { team.user_id }
+    end
+
+    context "when the team belongs to the user" do
+      let(:team) { teams(:bob_pink_team) }
+
+      before do
+        expect(team.user_id).to eq(user.id)
+      end
+
+      context "when sending valid params" do
+        let(:seat_params) { { name: "Buzz", email: "buzz@example.com" } }
+
+        it "redirects back to the team" do
+          sign_in(user)
+          do_request
+          expect(response).to redirect_to(team_path(team))
+        end
+
+        it "creates the model" do
+          sign_in(user)
+          do_request
+          expect(Seat.last.email).to eq("buzz@example.com")
+        end
+      end
+
+      context "when sending invalid params" do
+        let(:seat_params) { { email: "buzz@example.com" } }
+
+        it "is successful" do
+          sign_in(user)
+          do_request
+          expect(response).to have_http_status(:success)
+        end
+
+        it "does not create the model" do
+          sign_in(user)
+          do_request
+          expect(Seat.last.email).to_not eq("buzz@example.com")
+        end
       end
     end
   end
