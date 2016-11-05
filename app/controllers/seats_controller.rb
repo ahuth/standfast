@@ -34,6 +34,6 @@ class SeatsController < ApplicationController
   end
 
   def seat_params
-    params.require(:seat).permit(:email)
+    params.require(:seat).permit(:name, :email)
   end
 end

@@ -1,5 +1,6 @@
 <table>
   <thead>
+    <th>Name</th>
     <th>Email</th>
     <th></th>
     <th></th>
@@ -7,6 +8,7 @@
   <tbody>
     <% seats.each do |seat| %>
       <tr>
+        <td><%= seat.name %></td>
         <td><%= seat.email %></td>
         <td><%= link_to "Edit", edit_seat_path(seat) %></td>
         <td><%= button_to "Remove", seat_path(seat), method: :delete %></td>
