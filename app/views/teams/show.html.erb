@@ -4,5 +4,6 @@
 </p>
 
 <%= render partial: "seats/list", locals: { seats: @team.seats } %>
-<%= link_to 'New Seat', new_team_seat_path(@team) %>
+<%= link_to "Edit", edit_team_path(@team) %> |
+<%= link_to 'New Seat', new_team_seat_path(@team) %> |
 <%= link_to "Back", teams_path %>

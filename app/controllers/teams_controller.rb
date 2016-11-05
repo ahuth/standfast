@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_team, only: [:show]
+  before_action :load_team, only: [:show, :edit, :update]
 
   def index
     @teams = current_user.teams
@@ -20,6 +20,17 @@ class TeamsController < ApplicationController
       redirect_to teams_path, notice: "Team was succesfully created"
     else
       render action: "new"
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @team.update(team_params)
+      redirect_to @team, notice: "Team was succesfully updated"
+    else
+      render action: "edit"
     end
   end
 
