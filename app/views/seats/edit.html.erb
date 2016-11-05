@@ -1,22 +1,4 @@
-<%= form_for @seat do |f| %>
-  <% if @seat.errors.any? %>
-    <div class="error-explanation">
-      <h2><%= pluralize(@seat.errors.count, "errors") %> prevented this seat from being saved:</h2>
-      <ul>
-        <% @seat.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end%>
+<h1>Editing Seat</h1>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
+<%= render "form" %>
 <%= link_to "Back", team_path(@seat.team) %>
