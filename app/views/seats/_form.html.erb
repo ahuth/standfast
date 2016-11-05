@@ -1,4 +1,4 @@
-<%= form_for @seat do |f| %>
+<%= form_for [@team, @seat] do |f| %>
   <% if @seat.errors.any? %>
     <%= render partial: "shared/error_explanation", locals: { errors: @seat.errors, name: "seat" } %>
   <% end%>

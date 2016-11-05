@@ -4,6 +4,35 @@ require 'support/shared_examples/controllers'
 describe SeatsController, type: :controller do
   let(:user) { users(:bob) }
 
+  describe "#new" do
+    def do_request
+      get :new, params: { team_id: team.id }
+    end
+
+    it_behaves_like "login is required" do
+      let(:team) { teams(:bob_black_team) }
+    end
+
+    it_behaves_like "resource ownership is required" do
+      let(:team) { teams(:jane_blue_team) }
+      let(:resource_owner_id) { team.user_id }
+    end
+
+    context "when the seat belongs to the user" do
+      let(:team) { teams(:bob_black_team) }
+
+      before do
+        expect(team.user_id).to eq(user.id)
+      end
+
+      it "is successful" do
+        sign_in(user)
+        do_request
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
   describe "#edit" do
     def do_request
       get :edit, params: { id: seat.id }
