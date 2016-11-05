@@ -1,6 +1,5 @@
 require 'rails_helper'
-require 'support/shared_examples/requires_login'
-require 'support/shared_examples/requires_ownership'
+require 'support/shared_examples/controllers'
 
 describe TeamsController, type: :controller do
   let(:user) { users(:jane) }
