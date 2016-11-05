@@ -12,14 +12,17 @@
 
 ActiveRecord::Schema.define(version: 20161103202706) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "responses", force: :cascade do |t|
     t.text     "body",                       null: false
     t.boolean  "handled",    default: false, null: false
     t.integer  "seat_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.index ["handled"], name: "index_responses_on_handled"
-    t.index ["seat_id"], name: "index_responses_on_seat_id"
+    t.index ["handled"], name: "index_responses_on_handled", using: :btree
+    t.index ["seat_id"], name: "index_responses_on_seat_id", using: :btree
   end
 
   create_table "seats", force: :cascade do |t|
@@ -28,8 +31,8 @@ ActiveRecord::Schema.define(version: 20161103202706) do
     t.integer  "team_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id", "email"], name: "index_seats_on_team_id_and_email", unique: true
-    t.index ["team_id"], name: "index_seats_on_team_id"
+    t.index ["team_id", "email"], name: "index_seats_on_team_id_and_email", unique: true, using: :btree
+    t.index ["team_id"], name: "index_seats_on_team_id", using: :btree
   end
 
   create_table "teams", force: :cascade do |t|
@@ -37,8 +40,8 @@ ActiveRecord::Schema.define(version: 20161103202706) do
     t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "name"], name: "index_teams_on_user_id_and_name", unique: true
-    t.index ["user_id"], name: "index_teams_on_user_id"
+    t.index ["user_id", "name"], name: "index_teams_on_user_id_and_name", unique: true, using: :btree
+    t.index ["user_id"], name: "index_teams_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,8 +58,11 @@ ActiveRecord::Schema.define(version: 20161103202706) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "responses", "seats"
+  add_foreign_key "seats", "teams"
+  add_foreign_key "teams", "users"
 end
