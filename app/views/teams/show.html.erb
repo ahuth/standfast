@@ -3,10 +3,5 @@
   <%= @team.name %>
 </p>
 
-<ul>
-  <% @team.seats.each do |seat| %>
-    <li><%= seat.email %></li>
-  <% end %>
-</ul>
-
+<%= render partial: "seats/list", locals: { seats: @team.seats } %>
 <%= link_to "Back", teams_path %>
