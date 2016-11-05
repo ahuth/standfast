@@ -1,6 +1,6 @@
 if Rails.env.development?
   # User
-  jane = User.create(name: 'Jane', email: 'jane@example.com', password: 'password', password_confirmation: 'password')
+  jane = User.create(email: 'jane@example.com', password: 'password', password_confirmation: 'password')
 
   # Teams
   blue_team = Team.find_or_create_by(name: 'Blue', user_id: jane.id)
