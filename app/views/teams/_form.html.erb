@@ -1,0 +1,14 @@
+<%= form_for @team do |f| %>
+  <% if @team.errors.any? %>
+    <%= render partial: "shared/error_explanation", locals: { errors: @team.errors, name: "team" } %>
+  <% end%>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :teams, dependent: :destroy
+  has_many :seats, through: :teams
 
   validates :name, presence: true
 end
