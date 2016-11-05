@@ -19,8 +19,6 @@ describe TeamsController, type: :controller do
   end
 
   describe "#show" do
-    let(:team) { teams(:jane_red_team) }
-
     def do_request
       get :show, params: { id: team.id }
     end
@@ -34,10 +32,18 @@ describe TeamsController, type: :controller do
       let(:resource_owner_id) { team.user_id }
     end
 
-    it "is successful" do
-      sign_in(user)
-      do_request
-      expect(response).to have_http_status(:success)
+    context "when the team belongs to the user" do
+      let(:team) { teams(:jane_red_team) }
+
+      before do
+        expect(team.user_id).to eq(user.id)
+      end
+
+      it "is successful" do
+        sign_in(user)
+        do_request
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 end
