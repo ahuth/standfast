@@ -1,5 +1,16 @@
-<ul>
-  <% seats.each do |seat| %>
-    <li><%= seat.email %></li>
-  <% end %>
-</ul>
+<table>
+  <thead>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% seats.each do |seat| %>
+      <tr>
+        <td><%= seat.email %></td>
+        <td><%= link_to "Edit", edit_seat_path(seat) %></td>
+        <td><%= button_to "Remove", seat_path(seat), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
