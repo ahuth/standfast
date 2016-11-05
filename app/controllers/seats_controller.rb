@@ -1,6 +1,6 @@
 class SeatsController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_seat, only: [:edit, :update]
+  before_action :load_seat, only: [:edit, :update, :destroy]
 
   def edit
   end
@@ -11,6 +11,11 @@ class SeatsController < ApplicationController
     else
       render action: "edit"
     end
+  end
+
+  def destroy
+    @seat.destroy!
+    redirect_to team_path(@seat.team)
   end
 
   private

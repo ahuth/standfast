@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   resources :teams, only: [:index, :show], shallow: true do
-    resources :seats, only: [:edit, :update]
+    resources :seats, only: [:edit, :update, :destroy]
   end
 end
