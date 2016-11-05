@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'support/shared_examples/requires_login'
+require 'support/shared_examples/requires_ownership'
 
 describe TeamsController, type: :controller do
   let(:user) { users(:jane) }
@@ -19,6 +20,8 @@ describe TeamsController, type: :controller do
   end
 
   describe "#show" do
+    let(:team) { teams(:jane_red_team) }
+
     def do_request
       get :show, params: { id: team.id }
     end
@@ -27,31 +30,15 @@ describe TeamsController, type: :controller do
       let(:team) { teams(:jane_red_team) }
     end
 
-    context "for a team that is not owned by the user" do
+    it_behaves_like "it requires resource ownership" do
       let(:team) { teams(:bob_black_team) }
-
-      before do
-        expect(team.user_id).to_not eq(user.id)
-      end
-
-      it "is not successful" do
-        sign_in(user)
-        expect { do_request }.to raise_error(ActiveRecord::RecordNotFound)
-      end
+      let(:resource_owner_id) { team.user_id }
     end
 
-    context "for a team that is owned by the user" do
-      let(:team) { teams(:jane_red_team) }
-
-      before do
-        expect(team.user_id).to eq(user.id)
-      end
-
-      it "is successful" do
-        sign_in(user)
-        do_request
-        expect(response).to have_http_status(:success)
-      end
+    it "is successful" do
+      sign_in(user)
+      do_request
+      expect(response).to have_http_status(:success)
     end
   end
 end
