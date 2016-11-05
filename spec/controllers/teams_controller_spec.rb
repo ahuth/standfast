@@ -9,7 +9,7 @@ describe TeamsController, type: :controller do
       get :index
     end
 
-    it_behaves_like "it requires login"
+    it_behaves_like "login is required"
 
     it "is successful" do
       sign_in(user)
@@ -25,11 +25,11 @@ describe TeamsController, type: :controller do
       get :show, params: { id: team.id }
     end
 
-    it_behaves_like "it requires login" do
+    it_behaves_like "login is required" do
       let(:team) { teams(:jane_red_team) }
     end
 
-    it_behaves_like "it requires resource ownership" do
+    it_behaves_like "resource ownership is required" do
       let(:team) { teams(:bob_black_team) }
       let(:resource_owner_id) { team.user_id }
     end
