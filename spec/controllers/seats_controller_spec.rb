@@ -67,7 +67,7 @@ describe SeatsController, type: :controller do
 
         it "creates the model" do
           sign_in(user)
-          do_request
+          expect { do_request }.to change { Seat.count }.by(1)
           expect(Seat.last.email).to eq("buzz@example.com")
         end
       end
@@ -83,8 +83,7 @@ describe SeatsController, type: :controller do
 
         it "does not create the model" do
           sign_in(user)
-          do_request
-          expect(Seat.last.email).to_not eq("buzz@example.com")
+          expect { do_request }.to_not change { Seat.count }
         end
       end
     end
@@ -154,9 +153,7 @@ describe SeatsController, type: :controller do
         it "updates the model" do
           expect(seat.email).to_not eq("aaa@example.com")
           sign_in(user)
-          do_request
-          seat.reload
-          expect(seat.email).to eq("aaa@example.com")
+          expect { do_request }.to change { seat.reload.email }.to("aaa@example.com")
         end
       end
 
@@ -171,9 +168,7 @@ describe SeatsController, type: :controller do
 
         it "does not update the model" do
           sign_in(user)
-          do_request
-          seat.reload
-          expect(seat.email).to eq("bill@example.com")
+          expect { do_request }.to_not change { seat.reload.email }
         end
       end
     end
@@ -208,8 +203,7 @@ describe SeatsController, type: :controller do
 
       it "destroys the model" do
         sign_in(user)
-        do_request
-        expect(Seat.find_by(id: seat.id)).to be_nil
+        expect { do_request }.to change { Seat.count }.by(-1)
       end
     end
   end
