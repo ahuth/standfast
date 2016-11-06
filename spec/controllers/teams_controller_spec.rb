@@ -31,31 +31,9 @@ describe TeamsController, type: :controller do
   end
 
   describe "#edit" do
-    def do_request
-      get :edit, params: { id: team.id }
-    end
-
-    it_behaves_like "login is required" do
-      let(:team) { teams(:jane_blue_team) }
-    end
-
-    it_behaves_like "resource ownership is required" do
-      let(:team) { teams(:bob_black_team) }
-      let(:resource_owner_id) { team.user_id }
-    end
-
-    context "when the team belongs to the user" do
-      let(:team) { teams(:jane_blue_team) }
-
-      before do
-        expect(team.user_id).to eq(user.id)
-      end
-
-      it "is successful" do
-        sign_in(user)
-        do_request
-        expect(response).to have_http_status(:success)
-      end
+    it_behaves_like "a protected edit action" do
+      let(:owner_request_params) { { id: teams(:jane_blue_team).id } }
+      let(:non_owner_request_params) { { id: teams(:bob_black_team).id } }
     end
   end
 
