@@ -12,58 +12,12 @@ describe SeatsController, type: :controller do
   end
 
   describe "#create" do
-    def do_request
-      post :create, params: { team_id: team.id, seat: seat_params }
-    end
-
-    it_behaves_like "login is required" do
-      let(:team) { teams(:bob_pink_team) }
-      let(:seat_params) { {} }
-    end
-
-    it_behaves_like "resource ownership is required" do
-      let(:team) { teams(:jane_red_team) }
-      let(:seat_params) { {} }
-      let(:resource_owner_id) { team.user_id }
-    end
-
-    context "when the team belongs to the user" do
-      let(:team) { teams(:bob_pink_team) }
-
-      before do
-        expect(team.user_id).to eq(user.id)
-      end
-
-      context "when sending valid params" do
-        let(:seat_params) { { name: "Buzz", email: "buzz@example.com" } }
-
-        it "redirects back to the team" do
-          sign_in(user)
-          do_request
-          expect(response).to redirect_to(team_path(team))
-        end
-
-        it "creates the model" do
-          sign_in(user)
-          expect { do_request }.to change { Seat.count }.by(1)
-          expect(Seat.last.email).to eq("buzz@example.com")
-        end
-      end
-
-      context "when sending invalid params" do
-        let(:seat_params) { { email: "buzz@example.com" } }
-
-        it "is successful" do
-          sign_in(user)
-          do_request
-          expect(response).to have_http_status(:success)
-        end
-
-        it "does not create the model" do
-          sign_in(user)
-          expect { do_request }.to_not change { Seat.count }
-        end
-      end
+    it_behaves_like "a protected create action" do
+      let(:model) { Seat }
+      let(:valid_owner_request_params) { { team_id: teams(:bob_pink_team).id, seat: { name: "Buzz", email: "buzz@example.com" } } }
+      let(:valid_non_owner_request_params) { { team_id: teams(:jane_red_team).id, seat: { name: "Buzz", email: "buzz@example.com" } } }
+      let(:invalid_owner_request_params) { { team_id: teams(:bob_pink_team).id, seat: { email: "buzz@example.com" } } }
+      let(:after_create_redirect_url) { team_path(teams(:bob_pink_team)) }
     end
   end
 

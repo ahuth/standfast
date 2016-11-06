@@ -22,43 +22,11 @@ describe TeamsController, type: :controller do
   end
 
   describe "#create" do
-    def do_request
-      post :create, params: { team: team_params }
-    end
-
-    it_behaves_like "login is required" do
-      let(:team_params) { {} }
-    end
-
-    context "when sending valid params" do
-      let(:team_params) { { name: "Purple" } }
-
-      it "redirects back to the index" do
-        sign_in(user)
-        do_request
-        expect(response).to redirect_to(teams_path)
-      end
-
-      it "creates the model" do
-        sign_in(user)
-        expect { do_request }.to change { Team.count }.by(1)
-        expect(Team.last.name).to eq("Purple")
-      end
-    end
-
-    context "when sending invalid params" do
-      let(:team_params) { { name: "" } }
-
-      it "is successful" do
-        sign_in(user)
-        do_request
-        expect(response).to have_http_status(:success)
-      end
-
-      it "does not create the model" do
-        sign_in(user)
-        expect { do_request }.to_not change { Team.count }
-      end
+    it_behaves_like "a protected create action", skip_ownership_check: true do
+      let(:model) { Team }
+      let(:valid_owner_request_params) { { team: { name: "Purple" } } }
+      let(:invalid_owner_request_params) { { team: { name: "" } } }
+      let(:after_create_redirect_url) { teams_path }
     end
   end
 
