@@ -57,6 +57,22 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "standfast_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
+  # Use the inline queue adapter for now for testing purposes, for now. The asynchronously
+  # adapter doesn't seem to work because the rake task finishes before the job can be
+  # executed.
+  config.active_job.queue_adapter = :inline
+
+  # Configure ActionMailer for SendGrid.
+  config.action_mailer.smtp_settings = {
+    user_name: "apikey",
+    password: ENV.fetch("SENDGRID_API_KEY"),
+    domain: "standfastapp.com",
+    address: "smtp.sendgrid.net",
+    port: 587,
+    authentication: :login,
+    enable_starttls_auto: true
+  }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

@@ -31,6 +31,11 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Use the inline queue adapter for now for testing purposes, for now. The asynchronously
+  # adapter doesn't seem to work because the rake task finishes before the job can be
+  # executed.
+  config.active_job.queue_adapter = :inline
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
