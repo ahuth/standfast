@@ -63,7 +63,6 @@ Rails.application.configure do
   config.active_job.queue_adapter = :inline
 
   # Configure ActionMailer for SendGrid.
-  config.action_mailer.delivery_method = :sendgrid
   config.action_mailer.smtp_settings = {
     user_name: ENV["SENDGRID_USERNAME"],
     password: ENV["SENDGRID_PASSWORD"],
