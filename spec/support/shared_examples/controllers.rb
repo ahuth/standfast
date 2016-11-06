@@ -114,7 +114,7 @@ shared_examples "a protected new action" do |options = {}|
       end
     end
 
-    context "for an object owned by the user", if: !options[:skip_ownership_check] do
+    context "for an object owned by the user" do
       before do
         get :new, params: owner_request_params
       end
@@ -122,11 +122,6 @@ shared_examples "a protected new action" do |options = {}|
       it "is successful" do
         expect(response).to have_http_status(:success)
       end
-    end
-
-    it "is successful", if: options[:skip_ownership_check] do
-      get :new, params: owner_request_params
-      expect(response).to have_http_status(:success)
     end
   end
 end
