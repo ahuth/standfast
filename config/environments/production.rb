@@ -69,7 +69,7 @@ Rails.application.configure do
     domain: "standfastapp.com",
     address: "smtp.sendgrid.net",
     port: 587,
-    authentication: :plain,
+    authentication: :login,
     enable_starttls_auto: true
   }
 
