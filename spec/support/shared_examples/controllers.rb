@@ -288,3 +288,48 @@ shared_examples "a protected update action" do
     end
   end
 end
+
+shared_examples "a protected destroy action" do
+  context "when a user is not signed in" do
+    before do
+      expect(subject.current_user).to be_nil
+      delete :destroy, params: owner_request_params
+    end
+
+    it "redirects to the login page" do
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
+
+  context "when a user is signed in" do
+    before do
+      sign_in(user)
+    end
+
+    context "for an object not owned by the user" do
+      def do_request
+        delete :destroy, params: non_owner_request_params
+      end
+
+      it "is not successful" do
+        expect { do_request }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+
+    context "for an object owned by the user" do
+      let!(:initial_count) { model.count }
+
+      before do
+        delete :destroy, params: owner_request_params
+      end
+
+      it "redirects to the correct url" do
+        expect(response).to redirect_to(after_destroy_redirect_url)
+      end
+
+      it "destroys the model" do
+        expect(model.count).to eq(initial_count - 1)
+      end
+    end
+  end
+end
