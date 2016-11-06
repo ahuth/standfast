@@ -3,226 +3,64 @@ require 'support/shared_examples/controllers'
 
 describe TeamsController, type: :controller do
   let(:user) { users(:jane) }
+  let(:owned_team) { teams(:jane_blue_team) }
+  let(:non_owned_team) { teams(:bob_black_team) }
 
   describe "#index" do
-    def do_request
-      get :index
-    end
-
-    it_behaves_like "login is required"
-
-    it "is successful" do
-      sign_in(user)
-      do_request
-      expect(response).to have_http_status(:success)
-    end
+    it_behaves_like "a protected index action"
   end
 
   describe "#show" do
-    def do_request
-      get :show, params: { id: team.id }
-    end
-
-    it_behaves_like "login is required" do
-      let(:team) { teams(:jane_red_team) }
-    end
-
-    it_behaves_like "resource ownership is required" do
-      let(:team) { teams(:bob_black_team) }
-      let(:resource_owner_id) { team.user_id }
-    end
-
-    context "when the team belongs to the user" do
-      let(:team) { teams(:jane_red_team) }
-
-      before do
-        expect(team.user_id).to eq(user.id)
-      end
-
-      it "is successful" do
-        sign_in(user)
-        do_request
-        expect(response).to have_http_status(:success)
-      end
+    it_behaves_like "a protected show action" do
+      let(:object_owned_by_user) { owned_team }
+      let(:object_not_owned_by_user) { non_owned_team }
     end
   end
 
   describe "#new" do
-    let(:user) { users(:jane) }
-
-    def do_request
-      get :new
-    end
-
-    it_behaves_like "login is required"
-
-    it "is successful" do
-      sign_in(user)
-      do_request
-      expect(response).to have_http_status(:success)
+    it_behaves_like "a protected new action", skip_ownership_check: true do
+      let(:owner_request_params) { {} }
     end
   end
 
   describe "#create" do
-    def do_request
-      post :create, params: { team: team_params }
-    end
+    let(:valid_team_params) { { name: "Purple" } }
+    let(:invalid_team_params) { { name: "" } }
 
-    it_behaves_like "login is required" do
-      let(:team_params) { {} }
-    end
-
-    context "when sending valid params" do
-      let(:team_params) { { name: "Purple" } }
-
-      it "redirects back to the index" do
-        sign_in(user)
-        do_request
-        expect(response).to redirect_to(teams_path)
-      end
-
-      it "creates the model" do
-        sign_in(user)
-        expect { do_request }.to change { Team.count }.by(1)
-        expect(Team.last.name).to eq("Purple")
-      end
-    end
-
-    context "when sending invalid params" do
-      let(:team_params) { { name: "" } }
-
-      it "is successful" do
-        sign_in(user)
-        do_request
-        expect(response).to have_http_status(:success)
-      end
-
-      it "does not create the model" do
-        sign_in(user)
-        expect { do_request }.to_not change { Team.count }
-      end
+    it_behaves_like "a protected create action", skip_ownership_check: true do
+      let(:model) { Team }
+      let(:valid_owner_request_params) { { team: valid_team_params } }
+      let(:invalid_owner_request_params) { { team: invalid_team_params } }
+      let(:after_create_redirect_url) { teams_path }
     end
   end
 
   describe "#edit" do
-    def do_request
-      get :edit, params: { id: team.id }
-    end
-
-    it_behaves_like "login is required" do
-      let(:team) { teams(:jane_blue_team) }
-    end
-
-    it_behaves_like "resource ownership is required" do
-      let(:team) { teams(:bob_black_team) }
-      let(:resource_owner_id) { team.user_id }
-    end
-
-    context "when the team belongs to the user" do
-      let(:team) { teams(:jane_blue_team) }
-
-      before do
-        expect(team.user_id).to eq(user.id)
-      end
-
-      it "is successful" do
-        sign_in(user)
-        do_request
-        expect(response).to have_http_status(:success)
-      end
+    it_behaves_like "a protected edit action" do
+      let(:owner_request_params) { { id: owned_team.id } }
+      let(:non_owner_request_params) { { id: non_owned_team.id } }
     end
   end
 
   describe "update" do
-    def do_request
-      patch :update, params: { id: team.id, team: team_params }
-    end
+    let(:valid_team_params) { { name: "Green" } }
+    let(:invalid_team_params) { { name: "" } }
 
-    it_behaves_like "login is required" do
-      let(:team) { teams(:jane_blue_team) }
-      let(:team_params) { {} }
-    end
-
-    it_behaves_like "resource ownership is required" do
-      let(:team) { teams(:bob_black_team) }
-      let(:team_params) { {} }
-      let(:resource_owner_id) { team.user_id }
-    end
-
-    context "when the team belongs to the user" do
-      let(:team) { teams(:jane_blue_team) }
-
-      before do
-        expect(team.user_id).to eq(user.id)
-      end
-
-      context "when sending valid params" do
-        let(:team_params) { { name: "Green" } }
-
-        it "redirects to the new team" do
-          sign_in(user)
-          do_request
-          expect(response).to redirect_to(Team.last)
-        end
-
-        it "updates the model" do
-          expect(team.name).to_not eq("Green")
-          sign_in(user)
-          expect { do_request }.to change { team.reload.name }.to("Green")
-        end
-      end
-
-      context "when sending invalid params" do
-        let(:team_params) { { name: "" } }
-
-        it "is successful" do
-          sign_in(user)
-          do_request
-          expect(response).to have_http_status(:success)
-        end
-
-        it "does not update the model" do
-          sign_in(user)
-          do_request
-          expect { do_request }.to_not change { team.reload.name }
-        end
-      end
+    it_behaves_like "a protected update action" do
+      let(:model_updated?) { -> { owned_team.reload.name == "Green" } }
+      let(:valid_owner_request_params) { { id: owned_team.id, team: valid_team_params } }
+      let(:valid_non_owner_request_params) { { id: non_owned_team.id, team: valid_team_params } }
+      let(:invalid_owner_request_params) { { id: owned_team.id, team: invalid_team_params } }
+      let(:after_update_redirect_url) { team_path(owned_team) }
     end
   end
 
   describe "#destroy" do
-    def do_request
-      delete :destroy, params: { id: team.id }
-    end
-
-    it_behaves_like "login is required" do
-      let(:team) { teams(:jane_blue_team) }
-      let(:team_params) { {} }
-    end
-
-    it_behaves_like "resource ownership is required" do
-      let(:team) { teams(:bob_black_team) }
-      let(:team_params) { {} }
-      let(:resource_owner_id) { team.user_id }
-    end
-
-    context "when the team belongs to the user" do
-      let(:team) { teams(:jane_blue_team) }
-
-      before do
-        expect(team.user_id).to eq(user.id)
-      end
-
-      it "redirects to the teams index" do
-        sign_in(user)
-        do_request
-        expect(response).to redirect_to(teams_path)
-      end
-
-      it "destroys the model" do
-        sign_in(user)
-        expect { do_request }.to change { Team.count }.by(-1)
-      end
+    it_behaves_like "a protected destroy action" do
+      let(:model) { Team }
+      let(:owner_request_params) { { id: owned_team.id } }
+      let(:non_owner_request_params) { { id: non_owned_team.id } }
+      let(:after_destroy_redirect_url) { teams_path }
     end
   end
 end
