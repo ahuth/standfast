@@ -57,6 +57,11 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "standfast_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
+  # Use the inline queue adapter for now for testing purposes, for now. The asynchronously
+  # adapter doesn't seem to work because the rake task finishes before the job can be
+  # executed.
+  config.active_job.queue_adapter = :inline
+
   # Configure ActionMailer for SendGrid.
   config.action_mailer.delivery_method = :sendgrid
   config.action_mailer.smtp_settings = {
