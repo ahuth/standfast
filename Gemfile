@@ -8,6 +8,7 @@ gem 'rails', '~> 5.0'
 gem 'pg', '~> 0.19'
 gem 'puma', '~> 3.0'
 gem 'rack-timeout', '~> 0.4'
+gem 'sendgrid-ruby', '~> 4.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
 
