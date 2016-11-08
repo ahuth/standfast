@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'devise', '~> 4.2'
+gem 'griddler', '~> 1.3'
+gem 'griddler-sendgrid', '~> 0.0'
 gem 'pg', '~> 0.19'
 gem 'puma', '~> 3.0'
 gem 'rack-timeout', '~> 0.4'
