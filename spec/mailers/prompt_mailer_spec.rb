@@ -10,8 +10,8 @@ describe PromptMailer, type: :mailer do
       expect(mail.to).to match_array(team.seats.pluck(:email))
     end
 
-    it "includes the team ID in the subject" do
-      expect(mail.subject).to include("(#{team.id})")
+    it "includes information in the subject" do
+      expect(mail.subject).to include("[#{team.id}]")
     end
   end
 end
