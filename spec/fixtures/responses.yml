@@ -1,3 +1,9 @@
+jane_blue_team_adam_seat_response_1:
+  handled: Yes
+  seat: jane_blue_team_adam_seat
+  body: |
+    Stuff
+
 jane_blue_team_ryan_seat_response_1:
   handled: No
   seat: jane_blue_team_ryan_seat
