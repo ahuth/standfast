@@ -58,7 +58,7 @@ describe Email::Processor do
         end
 
         context "that the seat is on" do
-          let(:seat) { seats(:jane_blue_team_adam_seat) }
+          let(:seat) { seats(:jane_blue_team_eric_seat) }
           let(:last_response) { Response.last }
 
           before do

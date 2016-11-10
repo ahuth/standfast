@@ -1,0 +1,6 @@
+<% @responses.each do |response| %>
+  <blockquote>
+    <p><%= response.body %></p>
+    <footer><%= response.seat.name %></footer>
+  </blockquote>
+<% end %>
