@@ -4,6 +4,7 @@ module Compilers
       if !pacific_weekend_in_utc?
         teams_with_unhandled_responses.find_each do |team|
           SummaryMailer.daily_summary_email(team).deliver_later
+          team.responses.where(handled: false).update_all(handled: true)
         end
       end
     end

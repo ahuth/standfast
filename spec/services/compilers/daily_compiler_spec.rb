@@ -30,7 +30,7 @@ describe Compilers::DailyCompiler do
     end
 
     context "on a weekday" do
-      let(:unhandled_teams) { Team.joins(:responses).where("responses.handled = false") }
+      let!(:initial_unhandled_team_count) { unhandled_teams.count }
 
       before do
         travel_to Date.new(2016, 11, 8) do
@@ -38,11 +38,19 @@ describe Compilers::DailyCompiler do
         end
       end
 
+      def unhandled_teams
+        Team.joins(:responses).where("responses.handled = false")
+      end
+
       it "sends a daily summary to each team with unhandled responses" do
-        expect(unhandled_teams.count).to be > 0
-        expect(unhandled_teams.count).to be < Team.count
-        expect(enqueued_jobs.count).to eq(unhandled_teams.count)
+        expect(initial_unhandled_team_count).to be > 0
+        expect(initial_unhandled_team_count).to be < Team.count
+        expect(enqueued_jobs.count).to eq(initial_unhandled_team_count)
         expect(enqueued_jobs.last[:args].first).to eq("SummaryMailer")
+      end
+
+      it "sets handled to true for the responses" do
+        expect(unhandled_teams.count).to eq(0)
       end
     end
   end
