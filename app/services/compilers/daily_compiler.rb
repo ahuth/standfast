@@ -2,11 +2,19 @@ module Compilers
   class DailyCompiler
     def self.run
       if !pacific_weekend_in_utc?
-        teams_with_unhandled_responses.find_each do |team|
-          SummaryMailer.daily_summary_email(team).deliver_later
-        end
-        Response.where(handled: false).update_all(handled: true)
+        send_summaries!
+        mark_responses!
       end
+    end
+
+    def self.send_summaries!
+      teams_with_unhandled_responses.find_each do |team|
+        SummaryMailer.daily_summary_email(team).deliver_later
+      end
+    end
+
+    def self.mark_responses!
+      Response.where(handled: false).update_all(handled: true)
     end
 
     def self.pacific_weekend_in_utc?
