@@ -89,18 +89,34 @@ describe Email::Processor do
 
               before do
                 expect(previous_response).to_not be_handled
-                processor.process
               end
 
-              it "marks previous responses as handled" do
-                expect(previous_response.reload).to be_handled
+              context "when creating the response will not succeed" do
+                before do
+                  allow(Response).to receive(:create!).and_raise(ActiveRecord::Rollback)
+                  processor.process
+                end
+
+                it "does not mark previous responses as handled" do
+                  expect(previous_response.reload).to_not be_handled
+                end
               end
 
-              it "creates an unhandled response" do
-                expect(Response.count).to eq(initial_response_count + 2)
-                expect(last_response).to_not be_handled
-                expect(last_response.seat_id).to eq(seat.id)
-                expect(last_response.body).to eq("Wrote codes")
+              context "when creating the response will succeed" do
+                before do
+                  processor.process
+                end
+
+                it "marks previous responses as handled" do
+                  expect(previous_response.reload).to be_handled
+                end
+
+                it "creates an unhandled response" do
+                  expect(Response.count).to eq(initial_response_count + 2)
+                  expect(last_response).to_not be_handled
+                  expect(last_response.seat_id).to eq(seat.id)
+                  expect(last_response.body).to eq("Wrote codes")
+                end
               end
             end
 

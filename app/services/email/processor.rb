@@ -6,8 +6,10 @@ module Email
 
     def process
       return unless correct_email? && team && seat
-      unhandled_responses.update_all(handled: true)
-      Response.create!(seat: seat, body: @email.body)
+      Response.transaction do
+        unhandled_responses.update_all(handled: true)
+        Response.create!(seat: seat, body: @email.body)
+      end
     end
 
     private
