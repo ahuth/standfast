@@ -5,12 +5,16 @@ module Email
     end
 
     def process
-      return unless team && seat
+      return unless correct_email? && team && seat
       unhandled_responses.update_all(handled: true)
       Response.create!(seat: seat, body: @email.body)
     end
 
     private
+
+    def correct_email?
+      @email.to[:email] == "prompt@em.standfastapp.com"
+    end
 
     def from_email
       @email.from[:email]
