@@ -15,7 +15,7 @@ module Email
     private
 
     def correct_email?
-      @email.to.first[:email] == "prompt@em.standfastapp.com"
+      @email.to.any? { |recipient| recipient[:email] == "prompt@em.standfastapp.com" }
     end
 
     def from_email
