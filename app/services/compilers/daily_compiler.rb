@@ -17,9 +17,13 @@ module Compilers
       Response.where(handled: false).update_all(handled: true)
     end
 
+    # This object will be ran everyday at 9:30 am pacific time. However, we don't
+    # want to send it on weekends. The scheduler runs in UTC, and we need to take
+    # that into consideration. Fortunately, 9:30 am is 5:30 pm of the same day in
+    # UTC.
     def self.pacific_weekend_in_utc?
       today = Date.today
-      today.sunday? || today.monday?
+      today.saturday? || today.sunday?
     end
 
     def self.teams_with_unhandled_responses

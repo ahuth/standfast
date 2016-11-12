@@ -10,6 +10,7 @@ gem 'pg', '~> 0.19'
 gem 'puma', '~> 3.0'
 gem 'rack-timeout', '~> 0.4'
 gem 'rails', '~> 5.0'
+gem 'redcarpet', '~> 3.3'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 

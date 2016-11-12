@@ -19,6 +19,17 @@ describe Seat, type: :model do
       end
     end
 
+    context "with a long name" do
+      before do
+        seat.name = "a" * 256
+      end
+
+      it "is invalid" do
+        expect(seat).to_not be_valid
+        expect(seat.errors.full_messages).to eq(["Name is too long (maximum is 255 characters)"])
+      end
+    end
+
     context "without an email" do
       before do
         seat.email = nil
@@ -27,6 +38,17 @@ describe Seat, type: :model do
       it "is invalid" do
         expect(seat).to_not be_valid
         expect(seat.errors.full_messages).to eq(["Email can't be blank"])
+      end
+    end
+
+    context "with a long email" do
+      before do
+        seat.email = "a" * 256
+      end
+
+      it "is invalid" do
+        expect(seat).to_not be_valid
+        expect(seat.errors.full_messages).to eq(["Email is too long (maximum is 255 characters)"])
       end
     end
 

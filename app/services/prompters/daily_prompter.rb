@@ -8,6 +8,9 @@ module Prompters
       end
     end
 
+    # This object will be ran everyday at 5:00 pm pacific time. However, we don't
+    # want to send it on weekends. The scheduler runs in UTC, and we need to take
+    # that into consideration. That time is currently the _next_ day in UTC.
     def self.pacific_weekend_in_utc?
       today = Date.today
       today.sunday? || today.monday?

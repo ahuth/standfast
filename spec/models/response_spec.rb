@@ -76,4 +76,30 @@ describe Response, type: :model do
       end
     end
   end
+
+  describe "before save" do
+    let(:response) { responses(:jane_blue_team_adam_seat_response_1) }
+
+    context "of the body" do
+      before do
+        response.update(body: body)
+      end
+
+      context "when the body is very long" do
+        let(:body) { "a" * 65_537 }
+
+        it "truncates the body" do
+          expect(response.body).to eq("a" * 65_532 + "...")
+        end
+      end
+
+      context "when the body is not very long" do
+        let(:body) { "b" }
+
+        it "updates the body" do
+          expect(response.body).to eq("b")
+        end
+      end
+    end
+  end
 end
