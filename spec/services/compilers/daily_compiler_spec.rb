@@ -5,9 +5,9 @@ describe Compilers::DailyCompiler do
   include ActiveSupport::Testing::TimeHelpers
 
   describe ".run" do
-    context "on Sunday" do
+    context "on Saturday" do
       before do
-        travel_to Date.new(2016, 11, 6) do
+        travel_to Date.new(2016, 11, 12) do
           described_class.run
         end
       end
@@ -17,9 +17,9 @@ describe Compilers::DailyCompiler do
       end
     end
 
-    context "on Monday" do
+    context "on Sunday" do
       before do
-        travel_to Date.new(2016, 11, 7) do
+        travel_to Date.new(2016, 11, 13) do
           described_class.run
         end
       end
@@ -33,7 +33,7 @@ describe Compilers::DailyCompiler do
       let!(:initial_unhandled_team_count) { unhandled_teams.count }
 
       before do
-        travel_to Date.new(2016, 11, 8) do
+        travel_to Date.new(2016, 11, 11) do
           described_class.run
         end
       end
