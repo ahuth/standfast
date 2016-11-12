@@ -4,7 +4,7 @@ describe Email::Processor do
   let(:processor) { described_class.new(email) }
   let(:email) { OpenStruct.new({
     from: { email: seat.email },
-    to: { email: to_address },
+    to: [{ email: to_address }],
     subject: subject,
     body: "Wrote codes"
   }) }
