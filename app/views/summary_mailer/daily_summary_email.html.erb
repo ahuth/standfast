@@ -9,7 +9,7 @@
 
 <% @responses.each do |response| %>
   <blockquote>
-    <%= Renderers::Markdown.process(response.body).html_safe %>
+    <%= Renderers::Markdown.run(response.body).html_safe %>
     <p><em><%= response.seat.name %></em></p>
   </blockquote>
 <% end %>

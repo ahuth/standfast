@@ -1,6 +1,6 @@
 module Renderers
   class Markdown
-    def self.process(text)
+    def self.run(text)
       markdown.render(text)
     end
 

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe Renderers::Markdown do
-  describe ".process" do
-    let(:processed) { described_class.process(input) }
+  describe ".run" do
+    let(:processed) { described_class.run(input) }
 
     context "with safe input" do
       let(:input) do
