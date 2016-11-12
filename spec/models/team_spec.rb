@@ -19,6 +19,17 @@ describe Team, type: :model do
       end
     end
 
+    context "with a long name" do
+      before do
+        team.name = "a" * 256
+      end
+
+      it "is invalid" do
+        expect(team).to_not be_valid
+        expect(team.errors.full_messages).to eq(["Name is too long (maximum is 255 characters)"])
+      end
+    end
+
     context "with the name of another team from the same user" do
       let(:other_team) { teams(:jane_red_team) }
 

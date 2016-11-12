@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105203130) do
+ActiveRecord::Schema.define(version: 20161112170139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,20 +26,20 @@ ActiveRecord::Schema.define(version: 20161105203130) do
   end
 
   create_table "seats", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.string   "email",      null: false
-    t.integer  "team_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255, null: false
+    t.string   "email",      limit: 255, null: false
+    t.integer  "team_id",                null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["team_id", "email"], name: "index_seats_on_team_id_and_email", unique: true, using: :btree
     t.index ["team_id"], name: "index_seats_on_team_id", using: :btree
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "user_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255, null: false
+    t.integer  "user_id",                null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["user_id", "name"], name: "index_teams_on_user_id_and_name", unique: true, using: :btree
     t.index ["user_id"], name: "index_teams_on_user_id", using: :btree
   end
