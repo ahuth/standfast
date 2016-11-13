@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 ruby '2.3.1'
 
+gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'devise', '~> 4.2'
 gem 'griddler', '~> 1.3'
 gem 'griddler-sendgrid', '~> 0.0'
