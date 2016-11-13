@@ -1,4 +1,3 @@
 <h1>Editing Seat</h1>
 
-<%= render "form" %>
-<%= link_to "Back", team_path(@seat.team) %>
+<%= render "form", back_path: team_path(@seat.team) %>
