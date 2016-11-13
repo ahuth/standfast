@@ -9,7 +9,7 @@
   <body>
     <%= render "shared/nav" if user_signed_in? %>
     <%= render "shared/flash" if alert || notice %>
-    <main>
+    <main class="container-fluid">
       <%= yield %>
     </main>
   </body>
