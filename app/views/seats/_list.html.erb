@@ -11,7 +11,7 @@
         <td><%= seat.name %></td>
         <td><%= seat.email %></td>
         <td><%= link_to "Edit", edit_seat_path(seat) %></td>
-        <td><%= button_to "Remove", seat_path(seat), method: :delete, data: { confirm: "Are you sure?" } %></td>
+        <td><%= button_to "Remove", seat_path(seat), class: "btn btn-sm btn-outline-danger", method: :delete, data: { confirm: "Are you sure?" } %></td>
       </tr>
     <% end %>
   </tbody>
