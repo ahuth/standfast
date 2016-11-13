@@ -8,8 +8,8 @@
   </head>
   <body>
     <%= render "shared/nav" if user_signed_in? %>
-    <%= render "shared/flash" if alert || notice %>
     <main class="container-fluid">
+      <%= render "shared/flash" if alert || notice %>
       <%= yield %>
     </main>
   </body>
