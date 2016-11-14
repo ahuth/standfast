@@ -31,5 +31,16 @@ describe User, type: :model do
         expect(user.errors.full_messages).to eq(["Email has already been taken"])
       end
     end
+
+    context "without an account" do
+      before do
+        user.account = nil
+      end
+
+      it "is invalid" do
+        expect(user).to_not be_valid
+        expect(user.errors.full_messages).to eq(["Account must exist"])
+      end
+    end
   end
 end
