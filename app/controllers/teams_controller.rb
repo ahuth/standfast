@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
   before_action :load_team, only: [:show, :edit, :update, :destroy]
 
   def index
-    @teams = current_user.teams.order(:name)
+    @teams = current_account.teams.order(:name)
   end
 
   def show
@@ -15,7 +15,7 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.new(team_params)
-    @team.user = current_user
+    @team.account = current_account
     if @team.save
       redirect_to teams_path, notice: "Team was succesfully created"
     else
@@ -42,7 +42,7 @@ class TeamsController < ApplicationController
   private
 
   def load_team
-    @team = current_user.teams.find(params[:id])
+    @team = current_account.teams.find(params[:id])
   end
 
   def team_params
