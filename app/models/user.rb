@@ -5,4 +5,14 @@ class User < ApplicationRecord
          :rememberable, :trackable, :validatable
 
   belongs_to :account
+
+  before_validation :create_account, on: :create
+
+  private
+
+  def create_account
+    if account.blank?
+      self.account = Account.create!
+    end
+  end
 end

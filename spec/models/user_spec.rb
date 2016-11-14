@@ -43,4 +43,27 @@ describe User, type: :model do
       end
     end
   end
+
+  describe "creating a new one" do
+    before do
+      user.save!
+    end
+
+    context "with an account" do
+      let(:account) { accounts(:jane_account) }
+      let(:user) { User.new(email: "shaw@example.com", account_id: account.id, password: "password", password_confirmation: "password") }
+
+      it "keeps the provided account" do
+        expect(user.account_id).to eq(account.id)
+      end
+    end
+
+    context "without an account" do
+      let(:user) { User.new(email: "john@example.com", password: "password", password_confirmation: "password") }
+
+      it "creates a new account" do
+        expect(user.account).to be_present
+      end
+    end
+  end
 end
