@@ -30,11 +30,11 @@ describe Team, type: :model do
       end
     end
 
-    context "with the name of another team from the same user" do
+    context "with the name of another team from the same account" do
       let(:other_team) { teams(:jane_red_team) }
 
       before do
-        expect(team.user_id).to eq(other_team.user_id)
+        expect(team.account_id).to eq(other_team.account_id)
         team.name = other_team.name
       end
 
@@ -44,11 +44,11 @@ describe Team, type: :model do
       end
     end
 
-    context "with the name of another team from a different user" do
+    context "with the name of another team from a different account" do
       let(:other_team) { teams(:bob_black_team) }
 
       before do
-        expect(team.user_id).to_not eq(other_team.user_id)
+        expect(team.account_id).to_not eq(other_team.account_id)
         team.name = other_team.name
       end
 
