@@ -36,11 +36,11 @@ class SeatsController < ApplicationController
   private
 
   def load_seat
-    @seat = current_user.seats.find(params[:id])
+    @seat = current_account.seats.find(params[:id])
   end
 
   def load_team
-    @team = current_user.teams.find(params[:team_id])
+    @team = current_account.teams.find(params[:team_id])
   end
 
   def seat_params

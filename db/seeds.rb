@@ -1,10 +1,13 @@
 if Rails.env.development?
+  # Account
+  account = Account.create
+
   # User
-  jane = User.create(email: 'jane@example.com', password: 'password', password_confirmation: 'password')
+  jane = User.create(account_id: account.id, email: 'jane@example.com', password: 'password', password_confirmation: 'password')
 
   # Teams
-  blue_team = Team.find_or_create_by(name: 'Blue', user_id: jane.id)
-  red_team = Team.find_or_create_by(name: 'Red', user_id: jane.id)
+  blue_team = Team.find_or_create_by(name: 'Blue', account_id: account.id)
+  red_team = Team.find_or_create_by(name: 'Red', account_id: account.id)
 
   # Seats
   Seat.find_or_create_by(name: 'Adam', email: 'adam@example.com', team_id: blue_team.id)
