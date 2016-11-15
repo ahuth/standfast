@@ -1,0 +1,13 @@
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <%= render partial: "shared/error_explanation", locals: { errors: @user.errors, name: "user" } %>
+  <% end%>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email %>
+  </div>
+
+  <%= f.submit %>
+  <%= link_to "Back", back_path %>
+<% end %>
