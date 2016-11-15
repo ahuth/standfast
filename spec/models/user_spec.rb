@@ -44,7 +44,7 @@ describe User, type: :model do
     end
   end
 
-  describe "creating a new one" do
+  describe "creating" do
     before do
       user.save!
     end
@@ -63,6 +63,38 @@ describe User, type: :model do
 
       it "creates a new account" do
         expect(user.account).to be_present
+      end
+    end
+  end
+
+  describe "destroying" do
+    context "when more than one user is on the account" do
+      let(:user) { users(:bob) }
+
+      before do
+        expect(user.account.users.count).to be > 1
+        user.destroy
+      end
+
+      it "works" do
+        expect(user).to be_destroyed
+      end
+    end
+
+    context "when the user is the only one on the account" do
+      let(:user) { users(:jane) }
+
+      before do
+        expect(user.account.users.count).to eq(1)
+        user.destroy
+      end
+
+      it "does not work" do
+        expect(user).to_not be_destroyed
+      end
+
+      it "adds a helpful error message" do
+        expect(user.errors.full_messages).to eq(["Cannot remove the only user on an account"])
       end
     end
   end
