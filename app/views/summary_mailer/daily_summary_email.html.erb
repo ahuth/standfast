@@ -1,14 +1,5 @@
-<style>
-  blockquote {
-    background: whitesmoke;
-    border-left: 10px solid silver;
-    margin: 1.5em 10px;
-    padding: 0.5em 10px;
-  }
-</style>
-
 <% @responses.each do |response| %>
-  <blockquote>
+  <blockquote style="background: whitesmoke; border-left: 10px solid silver; margin: 1.5em 10px; padding: 0.5em 10px;">
     <%= Renderers::Markdown.run(response.body).html_safe %>
     <p><em><%= response.seat.name %></em></p>
   </blockquote>
