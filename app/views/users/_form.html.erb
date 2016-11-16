@@ -3,11 +3,11 @@
     <%= render partial: "shared/error_explanation", locals: { errors: @user.errors, name: "user" } %>
   <% end%>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email %><br />
-    <%= f.email_field :email %>
+    <%= f.email_field :email, class: "form-control" %>
   </div>
 
-  <%= f.submit %>
-  <%= link_to "Back", back_path %>
+  <%= f.submit class: "btn btn-outline-primary" %>
+  <%= link_to "Cancel", back_path, role: "button", class: "btn btn-outline-secondary" %>
 <% end %>
