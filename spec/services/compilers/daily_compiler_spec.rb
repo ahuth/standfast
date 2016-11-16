@@ -39,13 +39,13 @@ describe Compilers::DailyCompiler do
       end
 
       def unhandled_teams
-        Team.joins(:responses).where("responses.handled = false")
+        Team.joins(:responses).where("responses.handled = false").distinct
       end
 
       it "sends a daily summary to each team with unhandled responses" do
         expect(initial_unhandled_team_count).to be > 0
         expect(initial_unhandled_team_count).to be < Team.count
-        expect(enqueued_jobs.count).to eq(initial_unhandled_team_count)
+        expect(enqueued_jobs.count).to eq(1)
         expect(enqueued_jobs.last[:args].first).to eq("SummaryMailer")
       end
 

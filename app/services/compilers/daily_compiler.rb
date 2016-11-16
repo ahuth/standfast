@@ -27,7 +27,7 @@ module Compilers
     end
 
     def self.teams_with_unhandled_responses
-      Team.joins(:responses).where("responses.handled = false")
+      Team.joins(:responses).where("responses.handled = false").distinct
     end
 
     private_class_method :pacific_weekend_in_utc?
