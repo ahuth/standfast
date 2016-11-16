@@ -1,0 +1,8 @@
+<nav class="navbar navbar-light" aria-label="Primary">
+  <a class="navbar-brand" href="/">Standfast</a>
+  <ul class="nav navbar-nav float-xs-right">
+    <li class="nav-item">
+      <%= button_to "Logout", destroy_user_session_path, class: "btn btn-link", method: :delete %>
+    </li>
+  </ul>
+</nav>

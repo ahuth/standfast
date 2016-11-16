@@ -7,10 +7,17 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= render "shared/logout" if user_signed_in? %>
-    <%= render "shared/flash" if alert || notice %>
-    <main>
-      <%= yield %>
-    </main>
+    <%= render "shared/nav" %>
+    <div class="flex-container">
+      <div class="flex-fixed-small">
+        <%= render "shared/side" %>
+      </div>
+      <div class="flex-1">
+        <main class="container-fluid">
+          <%= render "shared/flash" if alert || notice %>
+          <%= yield %>
+        </main>
+      </div>
+    </div>
   </body>
 </html>
