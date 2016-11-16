@@ -8,17 +8,15 @@
   </head>
   <body>
     <%= render "shared/nav" %>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-2">
-          <%= render "shared/side" %>
-        </div>
-        <div class="col-xs-10">
-          <main class="container-fluid">
-            <%= render "shared/flash" if alert || notice %>
-            <%= yield %>
-          </main>
-        </div>
+    <div class="flex-container">
+      <div class="flex-fixed-small">
+        <%= render "shared/side" %>
+      </div>
+      <div class="flex-1">
+        <main class="container-fluid">
+          <%= render "shared/flash" if alert || notice %>
+          <%= yield %>
+        </main>
       </div>
     </div>
   </body>
