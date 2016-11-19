@@ -1,5 +1,5 @@
 class SummaryMailer < ApplicationMailer
-  default from: "noreply@standfastapp.com"
+  default from: "noreply@em.standfastapp.com"
 
   def daily_summary_email(team)
     @responses = team.responses.unhandled.includes(:seat)
