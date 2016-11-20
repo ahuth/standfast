@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe Schedulers::Weekday do
-  include ActiveJob::TestHelper
   include ActiveSupport::Testing::TimeHelpers
 
   describe ".run" do
