@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/shared_examples/schedulers'
 
 describe Schedulers::Weekday do
   include ActiveSupport::Testing::TimeHelpers
@@ -8,17 +9,11 @@ describe Schedulers::Weekday do
     let(:task_double) { double("Task", run: true) }
     let(:test_time) { Time.new(2016, 11, day, test_hour, 0, 0, offset) }
 
-    before do
-      travel_to(test_time) do
-        described_class.run(task_double, run_at, time_zone)
-      end
-    end
-
     context "in Eastern time" do
       let(:time_zone) { "Eastern Time (US & Canada)" }
 
       context "for 3pm" do
-        let(:run_at) { 15 }
+        run_at = 15
 
         context "on Sunday" do
           let(:day) { 13 }
@@ -27,29 +22,7 @@ describe Schedulers::Weekday do
             expect(test_time).to be_sunday
           end
 
-          context "an hour before" do
-            let(:test_hour) { run_at - 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
-
-          context "at the time" do
-            let(:test_hour) { run_at }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
-
-          context "an hour after" do
-            let(:test_hour) { run_at + 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
+          it_behaves_like "it does not get scheduled", run_at
         end
 
         context "on Monday" do
@@ -59,29 +32,7 @@ describe Schedulers::Weekday do
             expect(test_time).to be_monday
           end
 
-          context "an hour before" do
-            let(:test_hour) { run_at - 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
-
-          context "at the time" do
-            let(:test_hour) { run_at }
-
-            it "runs the task" do
-              expect(task_double).to have_received(:run)
-            end
-          end
-
-          context "an hour after" do
-            let(:test_hour) { run_at + 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
+          it_behaves_like "it gets scheduled", run_at
         end
 
         context "on Tuesday" do
@@ -91,29 +42,7 @@ describe Schedulers::Weekday do
             expect(test_time).to be_tuesday
           end
 
-          context "an hour before" do
-            let(:test_hour) { run_at - 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
-
-          context "at the time" do
-            let(:test_hour) { run_at }
-
-            it "runs the task" do
-              expect(task_double).to have_received(:run)
-            end
-          end
-
-          context "an hour after" do
-            let(:test_hour) { run_at + 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
+          it_behaves_like "it gets scheduled", run_at
         end
 
         context "on Wednesday" do
@@ -123,29 +52,7 @@ describe Schedulers::Weekday do
             expect(test_time).to be_wednesday
           end
 
-          context "an hour before" do
-            let(:test_hour) { run_at - 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
-
-          context "at the time" do
-            let(:test_hour) { run_at }
-
-            it "runs the task" do
-              expect(task_double).to have_received(:run)
-            end
-          end
-
-          context "an hour after" do
-            let(:test_hour) { run_at + 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
+          it_behaves_like "it gets scheduled", run_at
         end
 
         context "on Thursday" do
@@ -155,29 +62,7 @@ describe Schedulers::Weekday do
             expect(test_time).to be_thursday
           end
 
-          context "an hour before" do
-            let(:test_hour) { run_at - 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
-
-          context "at the time" do
-            let(:test_hour) { run_at }
-
-            it "runs the task" do
-              expect(task_double).to have_received(:run)
-            end
-          end
-
-          context "an hour after" do
-            let(:test_hour) { run_at + 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
+          it_behaves_like "it gets scheduled", run_at
         end
 
         context "on Friday" do
@@ -187,29 +72,7 @@ describe Schedulers::Weekday do
             expect(test_time).to be_friday
           end
 
-          context "an hour before" do
-            let(:test_hour) { run_at - 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
-
-          context "at the time" do
-            let(:test_hour) { run_at }
-
-            it "runs the task" do
-              expect(task_double).to have_received(:run)
-            end
-          end
-
-          context "an hour after" do
-            let(:test_hour) { run_at + 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
+          it_behaves_like "it gets scheduled", run_at
         end
 
         context "on Saturday" do
@@ -219,29 +82,7 @@ describe Schedulers::Weekday do
             expect(test_time).to be_saturday
           end
 
-          context "an hour before" do
-            let(:test_hour) { run_at - 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
-
-          context "at the time" do
-            let(:test_hour) { run_at }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
-
-          context "an hour after" do
-            let(:test_hour) { run_at + 1 }
-
-            it "does not run the task" do
-              expect(task_double).to_not have_received(:run)
-            end
-          end
+          it_behaves_like "it does not get scheduled", run_at
         end
       end
     end
