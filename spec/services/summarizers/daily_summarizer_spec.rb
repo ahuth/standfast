@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Compilers::DailyCompiler do
+describe Summarizers::DailySummarizer do
   include ActiveJob::TestHelper
 
   describe ".run" do

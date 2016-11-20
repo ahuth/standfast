@@ -1,5 +1,5 @@
-module Compilers
-  class DailyCompiler
+module Summarizers
+  class DailySummarizer
     def self.run
       send_summaries!
       mark_responses!
