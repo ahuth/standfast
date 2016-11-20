@@ -7,13 +7,18 @@ describe Schedulers::Summary do
   describe ".run" do
     let!(:unhandled_teams_count) { Team.joins(:responses).where("responses.handled = false").distinct.count }
 
+    before do
+      travel_to Time.utc(2016, 11, utc_day, utc_time) do
+        described_class.run
+      end
+    end
+
     context "on a weekday" do
+      let(:november_friday) { 18 }
+      let(:utc_day) { november_friday }
+
       context "at 6am" do
-        before do
-          travel_to Time.utc(2016, 11, 18, 14) do
-            described_class.run
-          end
-        end
+        let(:utc_time) { 14 }
 
         it "does not send daily prompts" do
           expect(enqueued_jobs.count).to eq(0)
@@ -21,11 +26,7 @@ describe Schedulers::Summary do
       end
 
       context "at 7am" do
-        before do
-          travel_to Time.utc(2016, 11, 18, 15) do
-            described_class.run
-          end
-        end
+        let(:utc_time) { 15 }
 
         it "sends a daily prompt to each team with unhandled responses" do
           expect(unhandled_teams_count).to be > 0
@@ -36,12 +37,11 @@ describe Schedulers::Summary do
     end
 
     context "on a weekend" do
+      let(:november_saturday) { 19 }
+      let(:utc_day) { november_saturday }
+
       context "at 6am" do
-        before do
-          travel_to Time.utc(2016, 11, 19, 14) do
-            described_class.run
-          end
-        end
+        let(:utc_time) { 14 }
 
         it "does not send daily prompts" do
           expect(enqueued_jobs.count).to eq(0)
@@ -49,11 +49,7 @@ describe Schedulers::Summary do
       end
 
       context "at 7am" do
-        before do
-          travel_to Time.utc(2016, 11, 19, 15) do
-            described_class.run
-          end
-        end
+        let(:utc_time) { 15 }
 
         it "does not send daily prompts" do
           expect(enqueued_jobs.count).to eq(0)

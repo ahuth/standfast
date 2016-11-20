@@ -7,13 +7,18 @@ describe Schedulers::Prompt do
   describe ".run" do
     let(:teams_count) { Team.count }
 
+    before do
+      travel_to Time.utc(2016, 11, utc_day, utc_time) do
+        described_class.run
+      end
+    end
+
     context "on a weekday" do
+      let(:november_friday) { 18 }
+      let(:utc_day) { november_friday + 1 }
+
       context "at 4pm" do
-        before do
-          travel_to Time.utc(2016, 11, 19, 0) do
-            described_class.run
-          end
-        end
+        let(:utc_time) { 0 }
 
         it "does not send daily prompts" do
           expect(enqueued_jobs.count).to eq(0)
@@ -21,11 +26,7 @@ describe Schedulers::Prompt do
       end
 
       context "at 5pm" do
-        before do
-          travel_to Time.utc(2016, 11, 19, 1) do
-            described_class.run
-          end
-        end
+        let(:utc_time) { 1 }
 
         it "sends a daily prompt for each team" do
           expect(teams_count).to be > 0
@@ -36,12 +37,11 @@ describe Schedulers::Prompt do
     end
 
     context "on a weekend" do
+      let(:november_saturday) { 19 }
+      let(:utc_day) { november_saturday + 1 }
+
       context "at 4pm" do
-        before do
-          travel_to Time.utc(2016, 11, 20, 0) do
-            described_class.run
-          end
-        end
+        let(:utc_time) { 0 }
 
         it "does not send daily prompts" do
           expect(enqueued_jobs.count).to eq(0)
@@ -49,11 +49,7 @@ describe Schedulers::Prompt do
       end
 
       context "at 5pm" do
-        before do
-          travel_to Time.utc(2016, 11, 20, 1) do
-            described_class.run
-          end
-        end
+        let(:utc_time) { 1 }
 
         it "does not send daily prompts" do
           expect(enqueued_jobs.count).to eq(0)
