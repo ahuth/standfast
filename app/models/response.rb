@@ -5,6 +5,7 @@ class Response < ApplicationRecord
 
   validates :body, presence: true
 
+  scope :handled, -> { where(handled: true) }
   scope :unhandled, -> { where(handled: false) }
 
   before_save :truncate_body, if: :body_changed?

@@ -26,7 +26,7 @@ describe SummaryMailer, type: :mailer do
     end
 
     context "for handled responses" do
-      let(:handled_responses) { team.responses.where(handled: true) }
+      let(:handled_responses) { team.responses.handled }
 
       before do
         expect(handled_responses.count).to be > 0

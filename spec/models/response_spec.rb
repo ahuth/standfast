@@ -32,6 +32,25 @@ describe Response, type: :model do
   end
 
   describe "scopes" do
+    describe "handled" do
+      let(:handled_response) { responses(:jane_blue_team_adam_seat_response_1) }
+      let(:unhandled_response) { responses(:jane_blue_team_ryan_seat_response_1) }
+      let(:scoped_ids) { described_class.handled.pluck(:id) }
+
+      before do
+        expect(handled_response).to be_handled
+        expect(unhandled_response).to_not be_handled
+      end
+
+      it "includes handled response" do
+        expect(scoped_ids).to include(handled_response.id)
+      end
+
+      it "excludes unhandled responses" do
+        expect(scoped_ids).to_not include(unhandled_response.id)
+      end
+    end
+
     describe "unhandled" do
       let(:handled_response) { responses(:jane_blue_team_adam_seat_response_1) }
       let(:unhandled_response) { responses(:jane_blue_team_ryan_seat_response_1) }
