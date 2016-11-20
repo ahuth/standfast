@@ -33,46 +33,21 @@ describe Response, type: :model do
 
   describe "scopes" do
     describe "unhandled" do
-      let(:response1) { responses(:jane_blue_team_ryan_seat_response_1) }
-      let(:response2) { responses(:jane_blue_team_shirish_seat_response_1) }
-      let(:response_ids) { [response1.id, response2.id] }
-      let(:scoped_ids) { unscoped.unhandled.pluck(:id) }
-      let(:unscoped) { Response.where(id: response_ids) }
+      let(:handled_response) { responses(:jane_blue_team_adam_seat_response_1) }
+      let(:unhandled_response) { responses(:jane_blue_team_ryan_seat_response_1) }
+      let(:scoped_ids) { described_class.unhandled.pluck(:id) }
 
-      context "when no responses are handled" do
-        before do
-          expect(response1).to_not be_handled
-          expect(response2).to_not be_handled
-        end
-
-        it "returns all responses" do
-          expect(scoped_ids).to match_array(response_ids)
-        end
+      before do
+        expect(handled_response).to be_handled
+        expect(unhandled_response).to_not be_handled
       end
 
-      context "when some responses are handled" do
-        before do
-          expect(response1).to_not be_handled
-          response2.handled = true
-          response2.save!
-        end
-
-        it "returns only the unhandled responses" do
-          expect(scoped_ids).to match_array([response1.id])
-        end
+      it "includes unhandled response" do
+        expect(scoped_ids).to include(unhandled_response.id)
       end
 
-      context "when all responses are handled" do
-        before do
-          response1.handled = true
-          response1.save!
-          response2.handled = true
-          response2.save!
-        end
-
-        it "returns no responses" do
-          expect(scoped_ids).to eq([])
-        end
+      it "excludes handled responses" do
+        expect(scoped_ids).to_not include(handled_response.id)
       end
     end
   end
