@@ -12,7 +12,7 @@ module Summarizers
     end
 
     def self.mark_responses!
-      Response.where(handled: false).update_all(handled: true)
+      Response.unhandled.update_all(handled: true)
     end
 
     def self.teams_with_unhandled_responses
