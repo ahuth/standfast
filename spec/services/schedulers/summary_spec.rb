@@ -5,7 +5,7 @@ describe Schedulers::Summary do
   include ActiveSupport::Testing::TimeHelpers
 
   describe ".run" do
-    let!(:unhandled_teams_count) { Team.joins(:responses).where("responses.handled = false").distinct.count }
+    let!(:unhandled_teams_count) { Team.with_unhandled_responses.count }
 
     before do
       travel_to Time.utc(2016, 11, utc_day, utc_time) do

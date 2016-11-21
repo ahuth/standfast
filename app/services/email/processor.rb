@@ -35,7 +35,7 @@ module Email
     end
 
     def unhandled_responses
-      seat.responses.where(handled: false)
+      seat.responses.unhandled
     end
 
     def seat

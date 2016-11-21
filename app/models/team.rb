@@ -4,4 +4,6 @@ class Team < ApplicationRecord
   has_many :responses, through: :seats
 
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { scope: :account_id }
+
+  scope :with_unhandled_responses, -> { joins(:responses).where("responses.handled = false").distinct }
 end
