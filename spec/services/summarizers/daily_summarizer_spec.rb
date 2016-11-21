@@ -4,14 +4,10 @@ describe Summarizers::DailySummarizer do
   include ActiveJob::TestHelper
 
   describe ".run" do
-    let!(:initial_unhandled_team_count) { unhandled_teams.count }
+    let!(:initial_unhandled_team_count) { Team.with_unhandled_responses.count }
 
     before do
       described_class.run
-    end
-
-    def unhandled_teams
-      Team.joins(:responses).where("responses.handled = false").distinct
     end
 
     it "sends a daily summary to each team with unhandled responses" do
@@ -22,7 +18,7 @@ describe Summarizers::DailySummarizer do
     end
 
     it "sets handled to true for the responses" do
-      expect(unhandled_teams.count).to eq(0)
+      expect(Team.with_unhandled_responses.count).to eq(0)
     end
   end
 end
