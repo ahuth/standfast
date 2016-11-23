@@ -1,62 +1,13 @@
 require 'rails_helper'
 
 describe Team, type: :model do
-  describe "validations" do
-    let(:team) { teams(:jane_blue_team) }
-
-    before do
-      expect(team).to be_valid
-    end
-
-    context "without a name" do
-      before do
-        team.name = nil
-      end
-
-      it "is invalid" do
-        expect(team).to_not be_valid
-        expect(team.errors.full_messages).to eq(["Name can't be blank"])
-      end
-    end
-
-    context "with a long name" do
-      before do
-        team.name = "a" * 256
-      end
-
-      it "is invalid" do
-        expect(team).to_not be_valid
-        expect(team.errors.full_messages).to eq(["Name is too long (maximum is 255 characters)"])
-      end
-    end
-
-    context "with the name of another team from the same account" do
-      let(:other_team) { teams(:jane_red_team) }
-
-      before do
-        expect(team.account_id).to eq(other_team.account_id)
-        team.name = other_team.name
-      end
-
-      it "is invalid" do
-        expect(team).to_not be_valid
-        expect(team.errors.full_messages).to eq(["Name has already been taken"])
-      end
-    end
-
-    context "with the name of another team from a different account" do
-      let(:other_team) { teams(:bob_black_team) }
-
-      before do
-        expect(team.account_id).to_not eq(other_team.account_id)
-        team.name = other_team.name
-      end
-
-      it "is still valid" do
-        expect(team).to be_valid
-      end
-    end
-  end
+  it { should belong_to(:account) }
+  it { should have_many(:seats).dependent(:destroy) }
+  it { should have_many(:responses).through(:seats) }
+  it { should validate_presence_of(:account) }
+  it { should validate_presence_of(:name) }
+  it { should validate_length_of(:name).is_at_most(255) }
+  it { should validate_uniqueness_of(:name).scoped_to(:account_id) }
 
   describe "scopes" do
     describe "with_unhandled_responses" do

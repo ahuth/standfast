@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 describe Account, type: :model do
-  let(:account) { accounts(:jane_account) }
-
-  it "exists" do
-    expect(account).to be_valid
-  end
+  it { should have_many(:users).dependent(:destroy) }
+  it { should have_many(:teams).dependent(:destroy) }
+  it { should have_many(:seats).through(:teams) }
 end
