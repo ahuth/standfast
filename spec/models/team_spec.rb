@@ -4,6 +4,7 @@ describe Team, type: :model do
   it { should belong_to(:account) }
   it { should have_many(:seats).dependent(:destroy) }
   it { should have_many(:responses).through(:seats) }
+  it { should validate_presence_of(:account) }
   it { should validate_presence_of(:name) }
   it { should validate_length_of(:name).is_at_most(255) }
   it { should validate_uniqueness_of(:name).scoped_to(:account_id) }

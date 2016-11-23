@@ -3,6 +3,7 @@ class Response < ApplicationRecord
 
   belongs_to :seat
 
+  validates :seat, presence: true
   validates :body, presence: true
 
   scope :handled, -> { where(handled: true) }

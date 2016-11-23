@@ -3,6 +3,7 @@ require 'rails_helper'
 describe Response, type: :model do
   it { should belong_to(:seat) }
   it { should validate_presence_of(:body) }
+  it { should validate_presence_of(:seat) }
 
   describe "scopes" do
     describe "handled" do

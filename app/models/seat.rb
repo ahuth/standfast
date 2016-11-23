@@ -4,4 +4,5 @@ class Seat < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 255 }
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: { scope: :team_id }
+  validates :team, presence: true
 end
