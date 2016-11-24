@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.3.1'
+ruby '2.3.3'
 
 gem 'bootstrap', '~> 4.0.0.alpha5'
 gem 'devise', '~> 4.2'
