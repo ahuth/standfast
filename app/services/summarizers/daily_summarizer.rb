@@ -6,7 +6,7 @@ module Summarizers
     end
 
     def self.send_summaries!
-      Team.with_unhandled_responses.find_each do |team|
+      Team.with_unhandled_responses.includes(:responses, :seats).find_each do |team|
         SummaryMailer.daily_summary_email(team).deliver_later
       end
     end
