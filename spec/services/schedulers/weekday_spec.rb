@@ -5,9 +5,9 @@ describe Schedulers::Weekday do
   include ActiveSupport::Testing::TimeHelpers
 
   describe ".run" do
-    let(:offset) { ActiveSupport::TimeZone[time_zone].formatted_offset }
     let(:task_double) { double("Task", run: true) }
-    let(:test_time) { Time.new(2016, 11, day, test_hour, 0, 0, offset) }
+    let(:test_time) { zone.local(2016, 11, day, test_hour) }
+    let(:zone) { ActiveSupport::TimeZone[time_zone] }
 
     context "in Eastern time" do
       let(:time_zone) { "Eastern Time (US & Canada)" }

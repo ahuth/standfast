@@ -6,19 +6,24 @@ describe Schedulers::Prompt do
 
   describe ".run" do
     let(:teams_count) { Team.count }
+    let(:test_time) { zone.local(2016, 11, day, hour) }
+    let(:zone) { ActiveSupport::TimeZone["Pacific Time (US & Canada)"] }
 
     before do
-      travel_to Time.utc(2016, 11, utc_day, utc_time) do
+      travel_to(test_time) do
         described_class.run
       end
     end
 
     context "on a weekday" do
-      let(:november_friday) { 18 }
-      let(:utc_day) { november_friday + 1 }
+      let(:day) { 18 }
+
+      before do
+        expect(test_time).to be_friday
+      end
 
       context "at 4pm" do
-        let(:utc_time) { 0 }
+        let(:hour) { 16 }
 
         it "does not send daily prompts" do
           expect(enqueued_jobs.count).to eq(0)
@@ -26,7 +31,7 @@ describe Schedulers::Prompt do
       end
 
       context "at 5pm" do
-        let(:utc_time) { 1 }
+        let(:hour) { 17 }
 
         it "sends a daily prompt for each team" do
           expect(teams_count).to be > 0
@@ -37,11 +42,14 @@ describe Schedulers::Prompt do
     end
 
     context "on a weekend" do
-      let(:november_saturday) { 19 }
-      let(:utc_day) { november_saturday + 1 }
+      let(:day) { 19 }
+
+      before do
+        expect(test_time).to be_saturday
+      end
 
       context "at 4pm" do
-        let(:utc_time) { 0 }
+        let(:hour) { 16 }
 
         it "does not send daily prompts" do
           expect(enqueued_jobs.count).to eq(0)
@@ -49,7 +57,7 @@ describe Schedulers::Prompt do
       end
 
       context "at 5pm" do
-        let(:utc_time) { 1 }
+        let(:hour) { 17 }
 
         it "does not send daily prompts" do
           expect(enqueued_jobs.count).to eq(0)
