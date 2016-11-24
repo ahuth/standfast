@@ -11,5 +11,4 @@
 // about supported directives.
 //
 //= require turbolinks
-//= require jstimezonedetect
 //= require_tree .
