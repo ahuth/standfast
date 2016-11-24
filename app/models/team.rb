@@ -6,5 +6,5 @@ class Team < ApplicationRecord
   validates :account, presence: true
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { scope: :account_id }
 
-  scope :with_unhandled_responses, -> { joins(:responses).where("responses.handled = false").distinct }
+  scope :with_unhandled_responses, -> { joins(:responses).merge(Response.unhandled).distinct }
 end
