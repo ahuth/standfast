@@ -1,15 +1,19 @@
 bob_black_team:
   name: black
   account: bob_account
+  time_zone: Eastern Time (US & Canada)
 
 bob_pink_team:
   name: pink
   account: bob_account
+  time_zone: Eastern Time (US & Canada)
 
 jane_blue_team:
   name: blue
   account: jane_account
+  time_zone: Pacific Time (US & Canada)
 
 jane_red_team:
   name: red
   account: jane_account
+  time_zone: Pacific Time (US & Canada)

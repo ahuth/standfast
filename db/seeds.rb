@@ -12,8 +12,8 @@ if Rails.env.development?
   jane.save!
 
   # Teams
-  blue_team = Team.find_or_create_by!(name: 'Blue', account_id: account.id)
-  red_team = Team.find_or_create_by!(name: 'Red', account_id: account.id)
+  blue_team = Team.find_or_create_by!(name: 'Blue', account_id: account.id, time_zone: "Pacific Time (US & Canada)")
+  red_team = Team.find_or_create_by!(name: 'Red', account_id: account.id, time_zone: "Pacific Time (US & Canada)")
 
   # Seats
   Seat.find_or_create_by!(name: 'Adam', email: 'adam@example.com', team_id: blue_team.id)
