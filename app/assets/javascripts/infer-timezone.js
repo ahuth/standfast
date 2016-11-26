@@ -1,5 +1,5 @@
-// Find every select with a `data-infer-timezone` attribute of `true` and set
-// its currently selected value to the browser's current time zone.
+// Find every anchor tag with a `data-infer-timezone` attribute of `true` and
+// add the browser's current timezone as a query param to the link.
 (function () {
   var mappings = {
     "Africa/Algiers": "West Central Africa",
@@ -138,11 +138,12 @@
   };
   var browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   var railsTimeZone = mappings[browserTimeZone] || "Pacific Time (US & Canada)";
+  var encodedTimeZone = encodeURIComponent(railsTimeZone);
 
   document.addEventListener("turbolinks:load", function (event) {
-    var elements = document.querySelectorAll("select[data-infer-timezone='true']");
+    var elements = document.querySelectorAll("a[data-infer-timezone='true']");
     elements.forEach(function (element) {
-      element.value = railsTimeZone;
+      element.href = element.href + "?time_zone=" + encodedTimeZone;
     });
   });
 }());
