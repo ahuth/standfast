@@ -1,7 +1,6 @@
 // Find every select with a `data-infer-timezone` attribute of `true` and set
 // its currently selected value to the browser's current time zone.
 (function () {
-  var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   var mappings = {
     "Africa/Algiers": "West Central Africa",
     "Africa/Cairo": "Cairo",
@@ -137,12 +136,13 @@
     "Pacific/Port_Moresby": "Port Moresby",
     "Pacific/Tongatapu": "Nuku'alofa",
   };
+  var browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  var railsTimeZone = mappings[browserTimeZone] || "Pacific Time (US & Canada)";
 
   document.addEventListener("turbolinks:load", function (event) {
     var elements = document.querySelectorAll("select[data-infer-timezone='true']");
-    var railsTimeZone = mappings[timeZone];
     elements.forEach(function (element) {
-      element.value = railsTimeZone || "Pacific Time (US & Canada)";
+      element.value = railsTimeZone;
     });
   });
 }());
