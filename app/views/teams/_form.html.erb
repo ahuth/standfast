@@ -10,7 +10,7 @@
 
   <div class="form-group">
     <%= f.label :time_zone %><br />
-    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {}, class: "form-control", data: { infer_timezone: @team.new_record? } %>
+    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {}, class: "form-control" %>
   </div>
 
   <%= f.submit class: "btn btn-outline-primary" %>

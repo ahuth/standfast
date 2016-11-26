@@ -21,6 +21,18 @@ describe TeamsController, type: :controller do
     it_behaves_like "a protected new action", skip_ownership_check: true do
       let(:owner_request_params) { {} }
     end
+
+    context "when the time_zone parameter is present" do
+      def do_request
+        get :new, params: { time_zone: "Berlin" }
+      end
+
+      it "works" do
+        sign_in(user)
+        do_request
+        expect(response).to have_http_status(:success)
+      end
+    end
   end
 
   describe "#create" do

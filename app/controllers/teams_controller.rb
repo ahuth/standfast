@@ -10,7 +10,7 @@ class TeamsController < ApplicationController
   end
 
   def new
-    @team = Team.new
+    @team = Team.new(time_zone: params[:time_zone])
   end
 
   def create
