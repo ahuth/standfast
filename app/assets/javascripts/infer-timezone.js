@@ -137,7 +137,17 @@
     "Pacific/Tongatapu": "Nuku'alofa",
   };
   var browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  var railsTimeZone = mappings[browserTimeZone] || "Pacific Time (US & Canada)";
+  var railsTimeZone = mappings[browserTimeZone];
+
+  if (!railsTimeZone) {
+    if (browserTimeZone) {
+      console.info("Time zone '" + browserTimeZone + "' not found");
+    } else {
+      console.info("No time zone retreived from the browser");
+    }
+    return;
+  }
+
   var encodedTimeZone = encodeURIComponent(railsTimeZone);
 
   document.addEventListener("turbolinks:load", function (event) {
