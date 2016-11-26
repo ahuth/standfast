@@ -1,20 +1,13 @@
 module Schedulers
   class Weekday
-    def self.run(task, time, time_zone)
-      task.run if !weekend?(time_zone) && is_time?(time, time_zone)
+    def self.run(task, hour)
+      teams = teams_to_run(hour)
+      task.run(teams) if teams.count > 0
     end
 
-    def self.is_time?(time, time_zone)
-      now = ActiveSupport::TimeZone[time_zone].now
-      now.hour == time
+    def self.teams_to_run(time)
+      zones = TimeZones::WeekdayHour.run(time)
+      Team.where(time_zone: zones)
     end
-
-    def self.weekend?(time_zone)
-      today = ActiveSupport::TimeZone[time_zone].today
-      today.saturday? || today.sunday?
-    end
-
-    private_class_method :is_time?
-    private_class_method :weekend?
   end
 end

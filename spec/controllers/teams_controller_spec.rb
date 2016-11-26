@@ -24,8 +24,8 @@ describe TeamsController, type: :controller do
   end
 
   describe "#create" do
-    let(:valid_team_params) { { name: "Purple" } }
-    let(:invalid_team_params) { { name: "" } }
+    let(:valid_team_params) { { name: "Purple", time_zone: "Pacific Time (US & Canada)"  } }
+    let(:invalid_team_params) { { name: "", time_zone: "Pacific Time (US & Canada)" } }
 
     it_behaves_like "a protected create action", skip_ownership_check: true do
       let(:model) { Team }
@@ -43,8 +43,8 @@ describe TeamsController, type: :controller do
   end
 
   describe "update" do
-    let(:valid_team_params) { { name: "Green" } }
-    let(:invalid_team_params) { { name: "" } }
+    let(:valid_team_params) { { name: "Green", time_zone: "Pacific Time (US & Canada)" } }
+    let(:invalid_team_params) { { name: "", time_zone: "Pacific Time (US & Canada)" } }
 
     it_behaves_like "a protected update action" do
       let(:model_updated?) { -> { owned_team.reload.name == "Green" } }
