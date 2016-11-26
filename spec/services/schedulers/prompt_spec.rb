@@ -5,9 +5,7 @@ describe Schedulers::Prompt do
   include ActiveSupport::Testing::TimeHelpers
 
   describe ".run" do
-    let(:teams_count) { Team.count }
     let(:test_time) { zone.local(2016, 11, day, hour) }
-    let(:zone) { ActiveSupport::TimeZone["Pacific Time (US & Canada)"] }
 
     before do
       travel_to(test_time) do
@@ -15,52 +13,60 @@ describe Schedulers::Prompt do
       end
     end
 
-    context "on a weekday" do
-      let(:day) { 18 }
+    context "in the pacific time zone" do
+      let(:zone) { ActiveSupport::TimeZone["Pacific Time (US & Canada)"] }
+      let(:pacific_teams) { Team.where(time_zone: zone.name) }
 
       before do
-        expect(test_time).to be_friday
+        expect(pacific_teams.count).to be > 0
       end
 
-      context "at 4pm" do
-        let(:hour) { 16 }
+      context "on a weekday" do
+        let(:day) { 18 }
 
-        it "does not send daily prompts" do
-          expect(enqueued_jobs.count).to eq(0)
+        before do
+          expect(test_time).to be_friday
+        end
+
+        context "at 4pm" do
+          let(:hour) { 16 }
+
+          it "does not send daily prompts" do
+            expect(enqueued_jobs.count).to eq(0)
+          end
+        end
+
+        context "at 5pm" do
+          let(:hour) { 17 }
+
+          it "sends a daily prompt for each team where its 5pm" do
+            expect(enqueued_jobs.count).to eq(pacific_teams.count)
+            expect(enqueued_jobs.last[:args].first).to eq("PromptMailer")
+          end
         end
       end
 
-      context "at 5pm" do
-        let(:hour) { 17 }
+      context "on a weekend" do
+        let(:day) { 19 }
 
-        it "sends a daily prompt for each team" do
-          expect(teams_count).to be > 0
-          expect(enqueued_jobs.count).to eq(teams_count)
-          expect(enqueued_jobs.last[:args].first).to eq("PromptMailer")
+        before do
+          expect(test_time).to be_saturday
         end
-      end
-    end
 
-    context "on a weekend" do
-      let(:day) { 19 }
+        context "at 4pm" do
+          let(:hour) { 16 }
 
-      before do
-        expect(test_time).to be_saturday
-      end
-
-      context "at 4pm" do
-        let(:hour) { 16 }
-
-        it "does not send daily prompts" do
-          expect(enqueued_jobs.count).to eq(0)
+          it "does not send daily prompts" do
+            expect(enqueued_jobs.count).to eq(0)
+          end
         end
-      end
 
-      context "at 5pm" do
-        let(:hour) { 17 }
+        context "at 5pm" do
+          let(:hour) { 17 }
 
-        it "does not send daily prompts" do
-          expect(enqueued_jobs.count).to eq(0)
+          it "does not send daily prompts" do
+            expect(enqueued_jobs.count).to eq(0)
+          end
         end
       end
     end
