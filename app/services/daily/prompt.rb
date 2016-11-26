@@ -1,5 +1,5 @@
-module Prompters
-  class DailyPrompter
+module Daily
+  class Prompt
     def self.run(teams)
       teams.includes(:seats).find_each do |team|
         PromptMailer.daily_status_email(team).deliver_later

@@ -1,5 +1,5 @@
-module Summarizers
-  class DailySummarizer
+module Daily
+  class Summary
     def self.run(teams)
       teams.with_unhandled_responses.includes(:responses, :seats).find_each do |team|
         SummaryMailer.daily_summary_email(team).deliver_later

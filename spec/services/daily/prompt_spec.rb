@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Prompters::DailyPrompter do
+describe Daily::Prompt do
   include ActiveJob::TestHelper
 
   describe ".run" do
