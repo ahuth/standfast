@@ -10,7 +10,29 @@ describe Team, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_most(255) }
     it { should validate_uniqueness_of(:name).scoped_to(:account_id) }
-    it { should validate_inclusion_of(:time_zone).in_array(ActiveSupport::TimeZone.all.map(&:name)) }
+
+    describe "time_zone" do
+      context "with a real time zone" do
+        before do
+          subject.time_zone = "Sri Jayawardenepura"
+        end
+
+        it "is valid" do
+          expect(subject).to be_valid
+        end
+      end
+
+      context "with a fake time zone" do
+        before do
+          subject.time_zone = "Mars"
+        end
+
+        it "is invalid" do
+          expect(subject).to_not be_valid
+          expect(subject.errors.full_messages).to eq(["Time zone does not exist"])
+        end
+      end
+    end
   end
 
   describe "scopes" do
