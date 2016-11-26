@@ -4,13 +4,15 @@ describe Prompters::DailyPrompter do
   include ActiveJob::TestHelper
 
   describe ".run" do
+    let(:teams) { Team.all }
+
     before do
-      described_class.run
+      expect(teams.count).to be > 0
+      described_class.run(teams)
     end
 
-    it "sends a daily prompt for each team" do
-      expect(Team.count).to be > 0
-      expect(enqueued_jobs.count).to eq(Team.count)
+    it "sends a daily prompt to each provided team" do
+      expect(enqueued_jobs.count).to eq(teams.count)
       expect(enqueued_jobs.last[:args].first).to eq("PromptMailer")
     end
   end

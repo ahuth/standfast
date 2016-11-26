@@ -1,7 +1,7 @@
 module Schedulers
   class Weekday
     def self.run(task, time, time_zone)
-      task.run if !weekend?(time_zone) && is_time?(time, time_zone)
+      task.run(Team.all) if !weekend?(time_zone) && is_time?(time, time_zone)
     end
 
     def self.is_time?(time, time_zone)
