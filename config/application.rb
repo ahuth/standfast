@@ -18,6 +18,9 @@ module Standfast
     # Run on all javascript files
     config.browserify_rails.force = true
 
+    # Turn on source maps for development
+    config.browserify_rails.source_map_environments << "development"
+
     unless Rails.env.production?
       # Make sure Browserify is triggered when asked to serve javascript spec files
       config.browserify_rails.paths << lambda do |p|
