@@ -11,4 +11,7 @@
 // about supported directives.
 //
 //= require turbolinks
-//= require_tree .
+
+import "./active";
+import "./confirm";
+import "./infer-timezone";
