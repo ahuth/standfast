@@ -153,7 +153,7 @@
   document.addEventListener("turbolinks:load", function (event) {
     let elements = document.querySelectorAll("a[data-infer-timezone='true']");
     elements.forEach(function (element) {
-      elements.href = element.href + `?time_zone=${encodedTimeZone}`;
+      element.href = element.href + `?time_zone=${encodedTimeZone}`;
     });
   });
 }());
