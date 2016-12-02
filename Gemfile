@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 ruby '2.3.3'
 
 gem 'bootstrap', '~> 4.0.0.alpha5'
+gem 'browserify-rails', '~> 3.4'
 gem 'devise', '~> 4.2'
 gem 'griddler', '~> 1.3'
 gem 'griddler-sendgrid', '~> 0.0'

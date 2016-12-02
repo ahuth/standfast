@@ -1,7 +1,7 @@
 // Find every anchor tag with a `data-infer-timezone` attribute of `true` and
 // add the browser's current timezone as a query param to the link.
 (function () {
-  var mappings = {
+  let mappings = {
     "Africa/Algiers": "West Central Africa",
     "Africa/Cairo": "Cairo",
     "Africa/Casablanca": "Casablanca",
@@ -136,24 +136,24 @@
     "Pacific/Port_Moresby": "Port Moresby",
     "Pacific/Tongatapu": "Nuku'alofa",
   };
-  var browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  var railsTimeZone = mappings[browserTimeZone];
+  let browserTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  let railsTimeZone = mappings[browserTimeZone];
 
   if (!railsTimeZone) {
     if (browserTimeZone) {
-      console.info("Time zone '" + browserTimeZone + "' not found");
+      console.info(`Time zone '${browserTimeZone}' not found`);
     } else {
       console.info("No time zone retreived from the browser");
     }
     return;
   }
 
-  var encodedTimeZone = encodeURIComponent(railsTimeZone);
+  let encodedTimeZone = encodeURIComponent(railsTimeZone);
 
   document.addEventListener("turbolinks:load", function (event) {
-    var elements = document.querySelectorAll("a[data-infer-timezone='true']");
+    let elements = document.querySelectorAll("a[data-infer-timezone='true']");
     elements.forEach(function (element) {
-      element.href = element.href + "?time_zone=" + encodedTimeZone;
+      element.href = element.href + `?time_zone=${encodedTimeZone}`;
     });
   });
 }());
