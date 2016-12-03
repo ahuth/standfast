@@ -14,4 +14,8 @@
 
 import "./active";
 import "./confirm";
-import "./infer-timezone";
+import inferTimezone from "./infer-timezone";
+
+document.addEventListener("turbolinks:load", function (event) {
+  inferTimezone(document);
+});
