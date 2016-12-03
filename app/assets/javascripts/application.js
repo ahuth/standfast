@@ -12,6 +12,12 @@
 //
 //= require turbolinks
 
-import "./active";
-import "./confirm";
-import "./infer-timezone";
+import markActive from "./mark-active";
+import confirmClick from "./confirm-click";
+import inferTimezone from "./infer-timezone";
+
+document.addEventListener("turbolinks:load", function (event) {
+  markActive(document, window.location.pathname);
+  confirmClick(document);
+  inferTimezone(document, Intl.DateTimeFormat().resolvedOptions().timeZone);
+});

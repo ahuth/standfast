@@ -20,12 +20,5 @@ module Standfast
 
     # Turn on source maps for development
     config.browserify_rails.source_map_environments << "development"
-
-    unless Rails.env.production?
-      # Make sure Browserify is triggered when asked to serve javascript spec files
-      config.browserify_rails.paths << lambda do |p|
-        p.start_with?(Rails.root.join("spec/javascripts").to_s)
-      end
-    end
   end
 end
