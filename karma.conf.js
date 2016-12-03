@@ -57,7 +57,11 @@ module.exports = function(config) {
 
     // Browserify configuration
     browserify: {
-      debug: true
+      debug: true,
+      paths: ['app/assets/javascripts'],
+      transform: [
+        ['babelify', {presets: ['es2015']}]
+      ]
     }
   })
 }
