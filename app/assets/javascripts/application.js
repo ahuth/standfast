@@ -13,9 +13,10 @@
 //= require turbolinks
 
 import "./active";
-import "./confirm";
+import confirmClick from "./confirm-click";
 import inferTimezone from "./infer-timezone";
 
 document.addEventListener("turbolinks:load", function (event) {
+  confirmClick(document);
   inferTimezone(document);
 });
