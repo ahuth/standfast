@@ -17,7 +17,7 @@ import confirmClick from "./confirm-click";
 import inferTimezone from "./infer-timezone";
 
 document.addEventListener("turbolinks:load", function (event) {
-  markActive(document);
+  markActive(document, window.location.pathname);
   confirmClick(document);
   inferTimezone(document);
 });
