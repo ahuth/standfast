@@ -14,10 +14,25 @@ describe("inferTimezone", function () {
     root = template.content.firstChild;
   });
 
-  it("adds the rails time zone to link paths with infer-timezone=true", function () {
-    inferTimezone(root);
-    expect(root.children[0].getAttribute("href")).not.toEqual("/test");
-    expect(root.children[1].getAttribute("href")).toEqual("/test");
-    expect(root.children[2].getAttribute("href")).toEqual("/test");
+  describe("with a known timezone", function () {
+    const timezone = "Asia/Kolkata";
+
+    it("adds the rails time zone to link paths with infer-timezone=true", function () {
+      inferTimezone(root, timezone);
+      expect(root.children[0].getAttribute("href")).toEqual("/test?time_zone=Mumbai");
+      expect(root.children[1].getAttribute("href")).toEqual("/test");
+      expect(root.children[2].getAttribute("href")).toEqual("/test");
+    });
+  });
+
+  describe("with an unknown timezone", function () {
+    const timezone = "Mars";
+
+    it("does not add anything to the links", function () {
+      inferTimezone(root, timezone);
+      expect(root.children[0].getAttribute("href")).toEqual("/test");
+      expect(root.children[1].getAttribute("href")).toEqual("/test");
+      expect(root.children[2].getAttribute("href")).toEqual("/test");
+    });
   });
 });

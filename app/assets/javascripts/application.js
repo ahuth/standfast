@@ -19,5 +19,5 @@ import inferTimezone from "./infer-timezone";
 document.addEventListener("turbolinks:load", function (event) {
   markActive(document, window.location.pathname);
   confirmClick(document);
-  inferTimezone(document);
+  inferTimezone(document, Intl.DateTimeFormat().resolvedOptions().timeZone);
 });
