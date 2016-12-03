@@ -1,4 +1,5 @@
 import inferTimezone from "infer-timezone";
+import {parseDom} from "../support/javascripts";
 
 describe("inferTimezone", function () {
   const html = [
@@ -9,9 +10,7 @@ describe("inferTimezone", function () {
   let root;
 
   beforeEach(function () {
-    let template = document.createElement("template");
-    template.innerHTML = `<div>${html}</div>`;
-    root = template.content.firstChild;
+    root = parseDom(html);
   });
 
   describe("with a known timezone", function () {

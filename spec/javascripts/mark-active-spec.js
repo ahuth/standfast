@@ -1,4 +1,5 @@
 import markActive from "mark-active";
+import {parseDom} from "../support/javascripts";
 
 describe("markActive", function () {
   const html = [
@@ -8,9 +9,7 @@ describe("markActive", function () {
   let root;
 
   beforeEach(function () {
-    let template = document.createElement("template");
-    template.innerHTML = `<div>${html}</div>`;
-    root = template.content.firstChild;
+    root = parseDom(html);
   });
 
   describe("when the pathname does not match any of the attributes", function () {

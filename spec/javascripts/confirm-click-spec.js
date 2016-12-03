@@ -1,4 +1,5 @@
 import confirmClick from "confirm-click";
+import {parseDom} from "../support/javascripts";
 
 describe("confirmClick", function () {
   const html = [
@@ -8,9 +9,7 @@ describe("confirmClick", function () {
   let root;
 
   beforeEach(function () {
-    let template = document.createElement("template");
-    template.innerHTML = `<div>${html}</div>`;
-    root = template.content.firstChild;
+    root = parseDom(html);
     spyOn(window, "confirm");
     confirmClick(root);
   });
