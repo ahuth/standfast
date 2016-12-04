@@ -16,6 +16,7 @@
     "no-var": "error",
     "object-curly-spacing": ["error", "never"],
     "quotes": ["error", "double", {"avoidEscape": true}],
+    "radix": ["error", "always"],
     "semi": ["error", "never"]
   }
 }
