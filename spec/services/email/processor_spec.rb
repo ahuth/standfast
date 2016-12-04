@@ -2,12 +2,14 @@ require "rails_helper"
 
 describe Email::Processor do
   let(:processor) { described_class.new(email) }
-  let(:email) { OpenStruct.new({
-    from: { email: seat.email },
-    to: [{ email: to_address }],
-    subject: subject,
-    body: "Wrote codes"
-  }) }
+  let(:email) do
+    OpenStruct.new({
+      from: { email: seat.email },
+      to: [{ email: to_address }],
+      subject: subject,
+      body: "Wrote codes"
+    })
+  end
 
   describe "#process" do
     let!(:initial_response_count) { Response.count }
