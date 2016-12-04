@@ -229,7 +229,7 @@ shared_examples "a protected update action" do
 
     context "for an object owned by the user" do
       before do
-        expect(model_updated?.()).to eq(false)
+        expect(model_updated?.call).to eq(false)
       end
 
       context "for invalid params" do
@@ -242,7 +242,7 @@ shared_examples "a protected update action" do
         end
 
         it "does not update the model" do
-          expect(model_updated?.()).to eq(false)
+          expect(model_updated?.call).to eq(false)
         end
       end
 
@@ -256,7 +256,7 @@ shared_examples "a protected update action" do
         end
 
         it "updates the model" do
-          expect(model_updated?.()).to eq(true)
+          expect(model_updated?.call).to eq(true)
         end
       end
     end
