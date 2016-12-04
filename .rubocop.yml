@@ -63,3 +63,9 @@ Style/NumericPredicate:
 Style/StringLiterals:
   EnforcedStyle: double_quotes
   Enabled: true
+
+# Enforce having a trailing comma for every line in a multi-line Hash or Array
+# literal. This makes diffs smaller and reduces syntax errors when adding items.
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
+  Enabled: true

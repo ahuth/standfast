@@ -5,7 +5,7 @@ if Rails.env.development?
   # User
   jane = User.find_or_initialize_by({
     account_id: account.id,
-    email: "jane@example.com"
+    email: "jane@example.com",
   })
   jane.password = "password"
   jane.encrypted_password = User.new.send(:password_digest, "password")

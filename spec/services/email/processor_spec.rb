@@ -7,7 +7,7 @@ describe Email::Processor do
       from: { email: seat.email },
       to: [{ email: to_address }],
       subject: subject,
-      body: "Wrote codes"
+      body: "Wrote codes",
     })
   end
 

@@ -8,7 +8,7 @@ module Renderers
       Redcarpet::Markdown.new(renderer, {
         autolink: true,
         no_intra_emphasis: true,
-        strikethrough: true
+        strikethrough: true,
       })
     end
 
@@ -17,7 +17,7 @@ module Renderers
         filter_html: true,
         no_images: true,
         no_styles: true,
-        safe_links_only: true
+        safe_links_only: true,
       })
     end
 
