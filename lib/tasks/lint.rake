@@ -7,7 +7,7 @@ namespace :lint do
   desc "Run eslint"
   task :js do
     puts "Running eslint..."
-    sh "node_modules/.bin/eslint app/assets/javascripts/**/*.js spec/javascripts/**/*.js" do |ok|
+    sh "yarn run lint" do |ok|
       puts Colorize.green("No Javascript issues") + " detected" if ok
     end
   end
