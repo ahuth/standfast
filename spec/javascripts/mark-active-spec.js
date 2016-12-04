@@ -4,7 +4,7 @@ import {parseDom} from "../support/javascripts"
 describe("markActive", function () {
   const html = [
     '<li data-active="/foobar,/batbaz">First</li>',
-    '<li data-active="/fizzbuzz">Second</li>'
+    '<li data-active="/fizzbuzz">Second</li>',
   ].join("")
   let root
 
