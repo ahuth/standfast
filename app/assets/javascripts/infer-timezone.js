@@ -132,17 +132,17 @@ let mappings = {
   "Pacific/Pago_Pago": "American Samoa",
   "Pacific/Port_Moresby": "Port Moresby",
   "Pacific/Tongatapu": "Nuku'alofa",
-};
+}
 
 // Find every anchor tag with a `data-infer-timezone` attribute of `true` and
 // add the browser's current timezone as a query param to the link.
 export default function inferTimezone(nodes, browserTimeZone) {
   let railsTimeZone = mappings[browserTimeZone]
   if (railsTimeZone) {
-    let encodedTimeZone = encodeURIComponent(railsTimeZone);
-    let queryParam = `?time_zone=${encodedTimeZone}`;
+    let encodedTimeZone = encodeURIComponent(railsTimeZone)
+    let queryParam = `?time_zone=${encodedTimeZone}`
     nodes.querySelectorAll("a[data-infer-timezone='true']").forEach(function (element) {
-      element.href = element.getAttribute("href") + queryParam;
-    });
+      element.href = element.getAttribute("href") + queryParam
+    })
   }
 }
