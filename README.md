@@ -5,9 +5,10 @@ Aggregate and share status reports via email
 ## Prerequisites
 
 1. Ruby 2.3.3
-2. Node 7.2
-3. Yarn 0.17.9
-4. PostgreSQL 9.6
+2. Bundler 1.13.6
+3. Node 7.2
+4. Yarn 0.17.9
+5. PostgreSQL 9.6
 
 ## Installation
 
