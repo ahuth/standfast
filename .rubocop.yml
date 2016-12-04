@@ -23,6 +23,15 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
   Enabled: true
