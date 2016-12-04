@@ -10,7 +10,4 @@ namespace :lint do
 end
 
 desc "Run Ruby and Javascript linters"
-task :lint do
-  Rake::Task["lint:rubocop"].invoke
-  Rake::Task["lint:eslint"].invoke
-end
+task :lint => ["lint:rubocop", "lint:eslint"]
