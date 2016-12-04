@@ -1,4 +1,3 @@
-
 if !Rails.env.production?
   require "colorize"
   require "rubocop/rake_task"
