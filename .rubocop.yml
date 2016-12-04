@@ -76,3 +76,8 @@ Style/StringLiterals:
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: comma
   Enabled: true
+
+# Don't enforce unless instead of !if. Oftentimes unless is difficult for me to
+# understand.
+Style/NegatedIf:
+  Enabled: false
