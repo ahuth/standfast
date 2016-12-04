@@ -36,7 +36,7 @@ describe TeamsController, type: :controller do
   end
 
   describe "#create" do
-    let(:valid_team_params) { { name: "Purple", time_zone: "Pacific Time (US & Canada)"  } }
+    let(:valid_team_params) { { name: "Purple", time_zone: "Pacific Time (US & Canada)" } }
     let(:invalid_team_params) { { name: "", time_zone: "Pacific Time (US & Canada)" } }
 
     it_behaves_like "a protected create action", skip_ownership_check: true do
