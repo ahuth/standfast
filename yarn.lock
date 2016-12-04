@@ -1361,7 +1361,7 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint@^3.11.1:
+eslint@>=0.24.0, eslint@^3.11.1:
   version "3.11.1"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.11.1.tgz#408be581041385cba947cd8d1cd2227782b55dbf"
   dependencies:
@@ -2129,6 +2129,13 @@ karma-chrome-launcher@^2.0.0:
   dependencies:
     fs-access "^1.0.0"
     which "^1.2.1"
+
+karma-eslint@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/karma-eslint/-/karma-eslint-2.1.0.tgz#9b1173305de2678dab57e1b34b60ae87f81138d4"
+  dependencies:
+    chalk "^1.1.0"
+    eslint ">=0.24.0"
 
 karma-jasmine@^1.0.2:
   version "1.0.2"
