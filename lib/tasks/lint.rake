@@ -1,16 +1,17 @@
 require "rubocop/rake_task"
+require "colorize"
 
 namespace :lint do
-  RuboCop::RakeTask.new
+  RuboCop::RakeTask.new(:ruby)
 
   desc "Run eslint"
-  task :eslint do
-    sh "node_modules/.bin/eslint app/assets/javascripts/**/*.js spec/javascripts/**/*.js"
+  task :js do
+    puts "Running eslint..."
+    sh "node_modules/.bin/eslint app/assets/javascripts/**/*.js spec/javascripts/**/*.js" do |ok|
+      puts Colorize.green("No Javascript issues") + " detected" if ok
+    end
   end
 end
 
 desc "Run Ruby and Javascript linters"
-task :lint do
-  Rake::Task["lint:rubocop"].invoke
-  Rake::Task["lint:eslint"].invoke
-end
+task :lint => ["lint:ruby", "lint:js"]

@@ -21,8 +21,8 @@ Finally, run the app with `rails s`.
 
 ## Linting
 
-Run all linters with `rake lint`. Additionally, you can run `rake lint:rubocop` or `rake lint:eslint` for only the back end or front end ones respectively.
+Run all linters with `rake lint`. Additionally, you can run `rake lint:ruby` or `rake lint:js` for only the back end or front end ones respectively.
 
 ## Testing
 
-Run the Ruby tests with `rspec`. Run the Javascript tests with `yarn test`.
+Run all tests with `rake spec`. Run `rspec` to run just the Ruby tests and `rake spec:js` to run just the Javascript tests.

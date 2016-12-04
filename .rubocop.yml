@@ -42,6 +42,13 @@ Style/FrozenStringLiteralComment:
 Style/GuardClause:
   Enabled: false
 
+# Allow old-school hash rocket syntax with symbols. Would like to turn this on
+# to enforce consistency. However, an error gets thrown from rubocop when this
+# is turned on.
+Style/HashSyntax:
+  EnforcedStyle: no_mixed_keys
+  Enabled: false
+
 # Don't force shorter conditional statements to be on one line.
 Style/IfUnlessModifier:
   Enabled: false
