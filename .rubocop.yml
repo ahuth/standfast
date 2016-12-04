@@ -32,6 +32,10 @@ Style/GuardClause:
 Style/IfUnlessModifier:
   Enabled: false
 
+Style/IndentHash:
+  EnforcedStyle: consistent
+  Enabled: true
+
 Style/NumericPredicate:
   Enabled: false
 
