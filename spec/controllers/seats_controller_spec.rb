@@ -1,5 +1,5 @@
-require 'rails_helper'
-require 'support/shared_examples/controllers'
+require "rails_helper"
+require "support/shared_examples/controllers"
 
 describe SeatsController, type: :controller do
   let(:user) { users(:bob) }

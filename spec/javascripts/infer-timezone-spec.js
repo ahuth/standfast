@@ -5,7 +5,7 @@ describe("inferTimezone", function () {
   const html = [
     '<a class="link1" data-infer-timezone="true" href="/test">link1</a>',
     '<a class="link2" data-infer-timezone="false" href="/test">link2</a>',
-    '<a class="link3" href="/test">link3</a>'
+    '<a class="link3" href="/test">link3</a>',
   ].join("")
   let root
 

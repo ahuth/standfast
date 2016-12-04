@@ -1,0 +1,71 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Include:
+    - lib/**/*.rake
+  Exclude:
+    - config/**/*.rb
+    - bin/*
+    - db/schema.rb
+    - spec/rails_helper.rb
+    - spec/spec_helper.rb
+
+# Disable all metrics cops. These are mostly around measures of complexity, such
+# as lines of code and number of instance variables. I trust us to make good
+# tradeoffs in these areas.
+Metrics:
+  Enabled: false
+
+# Allow braces around hash parameters. If the final argument to a method is a Hash,
+# then Ruby lets us omit the brackets. However, sometimes for readability I prefer
+# to include them - particularly when the Hash is the _only_ argument.
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+# Don't require a comment at the top of each Module or Class describing what they
+# do. Most of the time the code should be self-explanatory enough, and we'll add
+# documentation and comments as necessary.
+Style/Documentation:
+  Enabled: false
+
+# Allow methods with nothing in them to be on multiple lines, instead of requiring
+# them to be on one line.
+Style/EmptyMethod:
+  Enabled: false
+
+# Don't require the frozen string comment at the top of each file.
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# Allow entire method bodies to be wrapped in a conditional. Oftentimes it's
+# "better" to instead conditionally return early. Sometimes, though, it's nice
+# for readability to use the wrapping conditional.
+Style/GuardClause:
+  Enabled: false
+
+# Don't force shorter conditional statements to be on one line.
+Style/IfUnlessModifier:
+  Enabled: false
+
+# Enforce a "consistent" Hash literal style where keys are indented in one level
+# from the preceding line. This will _not_allow values to be lined up.
+Style/IndentHash:
+  EnforcedStyle: consistent
+  Enabled: true
+
+# Allow conditionals with checks comparing a value to < or > 0. Without this,
+# we would be forced to use `negative?`, `zero?`, and `positive?`.
+Style/NumericPredicate:
+  Enabled: false
+
+# Enforce double quotes for strings. Double quotes allow interpolation in them,
+# but as far as I can tell there's no performance downside to using them all the
+# time.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+  Enabled: true
+
+# Enforce having a trailing comma for every line in a multi-line Hash or Array
+# literal. This makes diffs smaller and reduces syntax errors when adding items.
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
+  Enabled: true

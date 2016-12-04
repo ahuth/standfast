@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Renderers::Markdown do
   describe ".run" do
