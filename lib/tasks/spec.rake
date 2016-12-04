@@ -1,7 +1,7 @@
 namespace :spec do
   desc "Run the code examples in spec/javascripts"
   task :js do
-    sh "./node_modules/karma/bin/karma start --single-run" do
+    sh "yarn test" do
       # No op
     end
   end

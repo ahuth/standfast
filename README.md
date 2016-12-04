@@ -25,4 +25,4 @@ Run all linters with `rake lint`. Additionally, you can run `rake lint:ruby` or 
 
 ## Testing
 
-Run all tests with `rake spec`. Run `rspec` to run just the Ruby tests and `rake spec:js` to run just the Javascript tests.
+Run all tests with `rake spec`. Run `rspec` to run just the Ruby tests and `yarn test` to run just the Javascript tests.

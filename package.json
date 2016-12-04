@@ -6,7 +6,8 @@
     "yarn": "^0.17.9"
   },
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --auto-watch"
+    "test": "./node_modules/karma/bin/karma start --single-run",
+    "watch": "./node_modules/karma/bin/karma start --auto-watch"
   },
   "devDependencies": {
     "eslint": "^3.11.1",
