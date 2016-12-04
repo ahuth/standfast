@@ -5,7 +5,9 @@ namespace :lint do
 
   desc "Run eslint"
   task :eslint do
-    sh "node_modules/.bin/eslint app/assets/javascripts/**/*.js spec/javascripts/**/*.js"
+    sh "node_modules/.bin/eslint app/assets/javascripts/**/*.js spec/javascripts/**/*.js" do |ok|
+      puts "No lint issues found" if ok
+    end
   end
 end
 
