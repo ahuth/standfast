@@ -4,7 +4,7 @@
 export default function confirmClick(nodes) {
   nodes.querySelectorAll("[data-confirm]").forEach(function (element) {
     element.onclick = function (event) {
-      return window.confirm(event.target.dataset.confirm);
-    };
-  });
+      return window.confirm(event.target.dataset.confirm)
+    }
+  })
 }

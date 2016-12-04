@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Sat Dec 03 2016 09:38:06 GMT-0800 (PST)
+/* eslint-disable */
 
 module.exports = function(config) {
   config.set({
@@ -22,7 +23,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'spec/javascripts/**/*-spec.js': ['browserify']
+      'spec/javascripts/**/*-spec.js': ['eslint', 'browserify']
     },
 
     // test results reporter to use

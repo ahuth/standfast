@@ -1,0 +1,22 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jasmine": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "array-bracket-spacing": ["error", "never"],
+    "key-spacing": ["error", {"mode": "strict"}],
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "no-var": "error",
+    "object-curly-spacing": ["error", "never"],
+    "quotes": ["error", "double", {"avoidEscape": true}],
+    "radix": ["error", "always"],
+    "semi": ["error", "never"]
+  }
+}
