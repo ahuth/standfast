@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Email::Processor do
   let(:processor) { described_class.new(email) }

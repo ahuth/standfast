@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Seat, type: :model do
   it { should belong_to(:team) }

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Account, type: :model do
   it { should have_many(:users).dependent(:destroy) }

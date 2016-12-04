@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe TimeZones::WeekdayHour do
   include ActiveSupport::Testing::TimeHelpers
