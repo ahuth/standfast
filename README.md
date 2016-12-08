@@ -1,6 +1,6 @@
 # Standfast
 
-Collect and share status reports via email
+Collect and share status reports via email.
 
 ## Prerequisites
 
