@@ -8,6 +8,9 @@ AllCops:
     - db/schema.rb
     - spec/rails_helper.rb
     - spec/spec_helper.rb
+    - log/**/*
+    - tmp/**/*
+    - vendor/**/*
 
 # Disable all metrics cops. These are mostly around measures of complexity, such
 # as lines of code and number of instance variables. I trust us to make good
