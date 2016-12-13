@@ -6,7 +6,7 @@
     "yarn": "^0.17.10"
   },
   "scripts": {
-    "lint": "./node_modules/.bin/eslint app/assets/javascripts/**/*.js spec/javascripts/**/*.js",
+    "lint-js": "./node_modules/.bin/eslint app/assets/javascripts/**/*.js spec/javascripts/**/*.js",
     "lint-style": "./node_modules/.bin/stylelint app/assets/stylesheets/**/*.scss lib/assets/stylesheets/**/*.scss --syntax scss",
     "test": "./node_modules/karma/bin/karma start --single-run",
     "watch": "./node_modules/karma/bin/karma start --auto-watch"

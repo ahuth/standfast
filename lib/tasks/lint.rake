@@ -8,7 +8,7 @@ if !Rails.env.production?
     desc "Run eslint"
     task :js do
       puts "Running eslint..."
-      sh "yarn run lint" do |ok|
+      sh "yarn run lint-js" do |ok|
         puts Colorize.green("No Javascript issues") + " detected" if ok
       end
     end
