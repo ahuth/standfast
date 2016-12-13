@@ -21,7 +21,7 @@ Finally, run the app with `rails s`.
 
 ## Linting
 
-Run all linters with `rake lint`. You can also run `rake lint:ruby` or `rake lint:js` for only the back or front end.
+Run all linters with `rake lint`. You can also run `rake lint:ruby`, `rake lint:js`, or `rake lint:style` for only the back end, front end, or styles.
 
 ## Testing
 

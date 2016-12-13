@@ -12,8 +12,16 @@ if !Rails.env.production?
         puts Colorize.green("No Javascript issues") + " detected" if ok
       end
     end
+
+    desc "Run stylelint"
+    task :style do
+      puts "Running stylelint..."
+      sh "yarn run lint-style" do |ok|
+        puts Colorize.green("No style issues") + " detected" if ok
+      end
+    end
   end
 
   desc "Run Ruby and Javascript linters"
-  task :lint => ["lint:ruby", "lint:js"]
+  task :lint => ["lint:ruby", "lint:js", "lint:style"]
 end
