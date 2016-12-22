@@ -17,6 +17,7 @@ let mappings = {
   "America/Guyana": "Georgetown",
   "America/Halifax": "Atlantic Time (Canada)",
   "America/Indiana/Indianapolis": "Indiana (East)",
+  "America/Indianapolis": "Indiana (East)",
   "America/Juneau": "Alaska",
   "America/La_Paz": "La Paz",
   "America/Lima": "Lima",
