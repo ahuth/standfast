@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_active_nav, only: [:index, :show, :new, :edit]
 
   def index
     @teams = current_account.teams.order(:name)
@@ -47,5 +48,9 @@ class TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(:name, :time_zone)
+  end
+
+  def set_active_nav
+    @active_nav = "teams"
   end
 end

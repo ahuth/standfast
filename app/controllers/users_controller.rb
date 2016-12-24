@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_user, only: [:edit, :update, :destroy]
+  before_action :set_active_nav, only: [:index, :edit]
 
   def index
     @users = current_account.users
@@ -30,5 +31,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def set_active_nav
+    @active_nav = "users"
   end
 end

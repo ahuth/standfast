@@ -2,6 +2,7 @@ class SeatsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_seat, only: [:edit, :update, :destroy]
   before_action :load_team, only: [:new, :create]
+  before_action :set_active_nav, only: [:new, :edit]
 
   def new
     @seat = Seat.new(team: @team)
@@ -45,5 +46,9 @@ class SeatsController < ApplicationController
 
   def seat_params
     params.require(:seat).permit(:name, :email)
+  end
+
+  def set_active_nav
+    @active_nav = "teams"
   end
 end
