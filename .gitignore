@@ -21,3 +21,6 @@
 
 # Ignore front-end dependencies
 node_modules
+
+# Ignore node/npm debug log files
+npm-debug.log
