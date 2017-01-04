@@ -8,6 +8,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint app/assets/javascripts/**/*.js spec/javascripts/**/*.js",
     "test": "./node_modules/karma/bin/karma start --single-run",
+    "type": "./node_modules/.bin/flow",
     "watch": "./node_modules/karma/bin/karma start --auto-watch"
   },
   "devDependencies": {
