@@ -5,9 +5,13 @@
     "jasmine": true
   },
   "extends": "eslint:recommended",
+  "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module"
   },
+  "plugins": [
+    "flowtype"
+  ],
   "rules": {
     "array-bracket-spacing": ["error", "never"],
     "comma-dangle": ["error", {"arrays": "always-multiline", "objects": "always-multiline"}],
