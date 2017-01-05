@@ -12,8 +12,10 @@ module Standfast
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Configure Browserify to use babelify to compile ES6
-    config.browserify_rails.commandline_options = "-t [ babelify --presets [ es2015 ] ]"
+    # Configure Browserify to use babelify to
+    #   - Compile ES6
+    #   - Remove Flow type annotations
+    config.browserify_rails.commandline_options = "-t [ babelify --presets [ es2015 ] --plugins [ transform-flow-strip-types ] ]"
 
     # Run on all javascript files
     config.browserify_rails.force = true
