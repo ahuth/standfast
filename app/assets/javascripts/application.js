@@ -1,3 +1,5 @@
+// @flow
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -11,6 +13,8 @@
 // about supported directives.
 //
 //= require turbolinks
+
+declare var Intl: Object
 
 import confirmClick from "./confirm-click"
 import inferTimezone from "./infer-timezone"

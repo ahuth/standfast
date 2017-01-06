@@ -1,3 +1,5 @@
+// @flow
+
 let mappings = {
   "Africa/Algiers": "West Central Africa",
   "Africa/Cairo": "Cairo",
@@ -137,12 +139,12 @@ let mappings = {
 
 // Find every anchor tag with a `data-infer-timezone` attribute of `true` and
 // add the browser's current timezone as a query param to the link.
-export default function inferTimezone(nodes, browserTimeZone) {
+export default function inferTimezone(nodes: Document, browserTimeZone: string) {
   let railsTimeZone = mappings[browserTimeZone]
   if (railsTimeZone) {
     let encodedTimeZone = encodeURIComponent(railsTimeZone)
     let queryParam = `?time_zone=${encodedTimeZone}`
-    nodes.querySelectorAll("a[data-infer-timezone='true']").forEach(function (element) {
+    Array.from(nodes.querySelectorAll("a[data-infer-timezone='true']")).forEach(function (element: Object) {
       element.href = element.getAttribute("href") + queryParam
     })
   }
