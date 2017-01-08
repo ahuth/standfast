@@ -84,3 +84,7 @@ Style/TrailingCommaInLiteral:
 # understand.
 Style/NegatedIf:
   Enabled: false
+
+# Don't enforce using sigil and parens syntax for arrays of words.
+Style/WordArray:
+  Enabled: false

@@ -7,4 +7,6 @@ if !Rails.env.production?
       end
     end
   end
+
+  task :spec => ["spec:javascripts"]
 end
