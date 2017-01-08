@@ -25,4 +25,4 @@ Run all linters with `rake lint`. You can also run `rubocop -D` or `yarn lint` f
 
 ## Testing
 
-Run the Ruby tests with `rspec` and the Javascript tests with `yarn test`.
+Run all tests with `rake spec`. You can also run `rspec` or `yarn test` for only the back or front end.
