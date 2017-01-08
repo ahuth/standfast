@@ -12,7 +12,7 @@ gem 'pg', '~> 0.19'
 gem 'puma', '~> 3.6'
 gem 'rack-timeout', '~> 0.4'
 gem 'rails', '~> 5.0.1'
-gem 'redcarpet', '~> 3.3'
+gem 'redcarpet', '~> 3.4'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 3.0.4'
 
@@ -23,7 +23,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', '~> 3.1.5'
   gem 'rubocop', '~> 0.46', require: false
 end
 
