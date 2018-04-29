@@ -1,30 +1,29 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.3.3'
 
-gem 'bootstrap', '~> 4.0.0.alpha5'
-gem 'browserify-rails', '~> 3.4'
-gem 'devise', '~> 4.2'
-gem 'griddler', '~> 1.3'
-gem 'griddler-sendgrid', '~> 0.0'
-gem 'pg', '~> 0.19'
-gem 'puma', '~> 3.6'
+gem 'bootstrap', '~> 4.1'
+gem 'browserify-rails', '~> 4.3'
+gem 'devise', '~> 4.4'
+gem 'griddler', '~> 1.5'
+gem 'griddler-sendgrid', '~> 1.0'
+gem 'pg', '~> 1.0'
+gem 'puma', '~> 3.11'
 gem 'rack-timeout', '~> 0.4'
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.2'
 gem 'redcarpet', '~> 3.4'
-gem 'turbolinks', '~> 5'
-gem 'uglifier', '>= 3.0.4'
+gem 'turbolinks', '~> 5.1'
+gem 'uglifier', '~> 4.1'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'pry-byebug', '~> 3.4'
-  gem 'rspec-rails', '~> 3.5'
+  gem 'pry-byebug', '~> 3.6'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :development do
-  gem 'listen', '~> 3.1.5'
-  gem 'rubocop', '~> 0.46', require: false
+  gem 'listen', '~> 3.1'
+  gem 'rubocop', '~> 0.55', require: false
 end
 
 group :test do
